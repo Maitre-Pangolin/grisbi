@@ -1,0 +1,11 @@
+{
+  "name": "grisbi",
+  "version": "1.0.0",
+  "description": "A budget tracking PERN app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Martin Wasselet",
+  "license": "ISC"
+}
