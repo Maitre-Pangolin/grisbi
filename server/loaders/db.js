@@ -13,11 +13,6 @@ export const connectionValidation = async () => {
   }
 };
 
-export const selectAllUsers = async () => {
-  try {
-    const res = await pool.query("SELECT * FROM users");
-    logger.log(res.rows);
-  } catch (error) {
-    console.log(error);
-  }
+export const queryDB = async (query, params) => {
+  return await pool.query(query, params);
 };

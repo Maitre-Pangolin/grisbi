@@ -13,6 +13,7 @@ Goal is to build an expense & budget tracking app with the following functionnal
 
 *Additional*
 * Write test suite for practice
+* Document API Swagger OpticMiddleware ?
 * Sign-up/in through google / github 
 * Use Chart.js or D3 for visualization
 * Build another app with MongoDb (MERN) and using websocket
@@ -73,3 +74,30 @@ Used this after table creation ```GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA p
 Run a select query, everything seems to work, I'm not super clear regarding Pool vs Client and how to performs validation on my db connection. I guess I should write test ?
 
 Added a connectionValidation called at logging to check pool credentials.
+
+## 2021-12-09
+
+Let's work on the api, CRUD operations on expenses + monthly expense selection + totals per months.
+
+Setting up db layer =>controllers=>routes
+
+Issue with the privileges, now on the sequence for id creation, modified sql init script.
+
+DB expense creation works, need to fix some async/await for proper controller logic.
+
+Logic fixed, missed a return statement.
+
+First route functionnal ! 👍
+<img src='https://media.giphy.com/media/XreQmk7ETCak0/giphy.gif' width=400>
+
+Fixed input for now, need to use request body on expense creation.
+
+**User id should be retrieve through some sort of auth middleware, first time doing this , I guess I should use JWT , needs to brush up on this / find use case**
+
+Improved route error handling to propagate errors to express error handlers.
+
+Added body-parser and cors.
+
+Create expense working through Postman with json request body populated.
+
+Lunch break !

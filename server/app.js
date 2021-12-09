@@ -1,7 +1,6 @@
 import express from "express";
 import config from "./config/index.js";
 import loader from "./loaders/index.js";
-import { selectAllUsers } from "./loaders/db.js";
 
 const startServer = async () => {
   const app = express();

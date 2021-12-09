@@ -1,15 +1,17 @@
-import logger from "./logger.js";
 import express from "express";
 import morgan from "morgan";
-import { selectAllUsers } from "./db.js";
+import bodyparser from "body-parser";
+import cors from "cors";
+import logger from "./logger.js";
+import routerAPI from "../api/api.js";
 
 export default (app) => {
   app.use(morgan("dev"));
+  app.use(bodyparser.urlencoded({ extended: true }));
+  app.use(bodyparser.json());
+  app.use(cors());
 
-  app.use("/", (req, res) => {
-    selectAllUsers();
-    res.send();
-  });
+  app.use("/api", routerAPI);
 
   /// catch 404 and forward to error handler
   app.use((req, res, next) => {
@@ -20,6 +22,7 @@ export default (app) => {
 
   //Error Handling
   app.use((err, req, res, next) => {
+    logger.log(err);
     res.status(err.status || 500);
     res.json({
       errors: {

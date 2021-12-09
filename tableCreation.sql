@@ -52,3 +52,5 @@ VALUES ('Loyer','2021-12-05',1);
 select * from users;
 select * from categories;
 select * from expenses;
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO grisbi_admin;
