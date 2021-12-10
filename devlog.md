@@ -101,3 +101,9 @@ Added body-parser and cors.
 Create expense working through Postman with json request body populated.
 
 Lunch break !
+
+[JWT Token Video From Dev Ed](https://www.youtube.com/watch?v=2jqok-WgelI)
+
+Password encryption through bcryptjs and JWT implementation using jsonwebtoken 
+
+Created sample data for users with encrypted password, on to users signup and login route creation.
