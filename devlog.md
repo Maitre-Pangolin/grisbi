@@ -107,3 +107,11 @@ Lunch break !
 Password encryption through bcryptjs and JWT implementation using jsonwebtoken 
 
 Created sample data for users with encrypted password, on to users signup and login route creation.
+
+Created login route, with password encryption validation using bcrypt , and sending a JWT containing the user id if credentials are accepted.
+
+BREAK To do next, create a sign-up route and a protected route that require authentification.
+
+Sign up route created with password encryption.
+
+## 2021-12-10
