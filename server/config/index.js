@@ -12,4 +12,5 @@ if (envFound.error) {
 
 export default {
   port: parseInt(process.env.PORT, 10),
+  token_secret: process.env.TOKEN_SECRET,
 };
