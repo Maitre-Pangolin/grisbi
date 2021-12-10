@@ -115,3 +115,17 @@ BREAK To do next, create a sign-up route and a protected route that require auth
 Sign up route created with password encryption.
 
 ## 2021-12-10
+
+Brand new day, let's create a protected route and build a middleware to check for proper authentification i.e presence of a valid JWT in header.
+
+Should maybe create an extended error class to include status code at creation for better readability , DRYness. Let's think about refactoring
+
+Authentification middleware functionnal , protected route works as intented.
+
+Time to refactor some of the error handling, too verbose. 
+
+Created a ServerError class, handling in the express error handler. Should be straightforward to extend functionnality & handling logic.
+
+Refactored my console.logger to include any number of ...args
+
+Let's create fake expenses for at least two users and spanning three not contiguous months.

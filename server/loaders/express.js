@@ -22,7 +22,7 @@ export default (app) => {
 
   //Error Handling
   app.use((err, req, res, next) => {
-    logger.log(err);
+    logger.log(err.status, err.message);
     res.status(err.status || 500);
     res.json({
       errors: {

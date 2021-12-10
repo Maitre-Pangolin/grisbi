@@ -1,9 +1,10 @@
 import validator from "email-validator";
 import bcrypt from "bcryptjs";
+import { ServerError } from "../../utils/serverError.js";
 
 export const validateSignIn = (req, res, next) => {
   if (!req.body || !req.body.email || !req.body.password)
-    return res.status(400).send();
+    throw new ServerError("Invalid user for sign-in", 400);
   req.user = {
     email: req.body.email,
     password: req.body.password,
@@ -21,7 +22,7 @@ export const validateUser = async (req, res, next) => {
     !req.body.password ||
     !validator.validate(req.body.email)
   )
-    return res.status(400).send();
+    throw new ServerError("Invalid user for sign-up", 400);
 
   const salt = await bcrypt.genSalt(10);
   const password = await bcrypt.hash(req.body.password, salt);
