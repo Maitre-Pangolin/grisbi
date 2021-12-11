@@ -129,3 +129,10 @@ Created a ServerError class, handling in the express error handler. Should be st
 Refactored my console.logger to include any number of ...args
 
 Let's create fake expenses for at least two users and spanning three not contiguous months.
+
+
+SHOULD REFACTOR CONTROLLERS DB CALL => DRY 
+
+Should modify http res status.
+
+Implemented put and delete on expenses and refactored some routes
