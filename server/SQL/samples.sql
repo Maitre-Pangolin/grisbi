@@ -25,11 +25,43 @@ VALUES ('Walter','White','BlueKing','methisrad@gmail.com','$2a$10$dHXsb9Yo/NKokq
 INSERT INTO categories(name)
 VALUES ('Miscellaneous');
 INSERT INTO categories(name)
+VALUES ('Home');
+INSERT INTO categories(name)
 VALUES ('Drinks');
 INSERT INTO categories(name)
 VALUES ('Groceries');
 
-INSERT INTO expenses(name,amount,date,user_id)
-VALUES ('Loyer',100,'2021-12-05',1);
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (1,'Loyer',700,'2021-12-05','2021-12',2);
+
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (1,'Groceries',87.2,'2021-12-06','2021-12',4);
+
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (1,'Birra',87.2,'2021-12-08','2021-12',3);
+
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (1,'Ampoules',87.2,'2021-12-03','2021-12',1);
 
 
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (2,'Loyer',750,'2021-12-05','2021-12',2);
+
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (2,'Groceries',44,'2021-12-06','2021-12',4);
+
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (2,'Phone bill',54.2,'2021-12-06','2021-12',4);
+
+
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (1,'Loyer',700,'2021-11-05','2021-11',2);
+
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (1,'Groceries',87.2,'2021-11-06','2021-11',4);
+
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (1,'Birra',87.2,'2021-07-08','2021-07',3);
+
+INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
+VALUES (1,'Ampoules',87.2,'2021-07-02','2021-07',1);

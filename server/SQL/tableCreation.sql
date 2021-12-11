@@ -22,11 +22,12 @@ CREATE TABLE "categories" (
 
 CREATE TABLE "expenses" (
   "id" SERIAL PRIMARY KEY,
+	"user_id" int REFERENCES users(id),
   "name" varchar NOT NULL,
 	"amount" double precision NOT NULL CHECK (amount>0),
   "date" date NOT NULL,
-  "user_id" int REFERENCES users(id),
-  "category_id" int REFERENCES "categories" ("id")
+  "key_month" varchar(20) NOT NULL,
+  "category_id" int REFERENCES "categories" ("id") DEFAULT 1
 );
 
 CREATE TABLE "budgets" (
