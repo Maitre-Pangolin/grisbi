@@ -4,6 +4,11 @@ import bodyparser from "body-parser";
 import cors from "cors";
 import logger from "./logger.js";
 import routerAPI from "../api/api.js";
+import path from "path";
+import { ServerError } from "../utils/serverError.js";
+import { fileURLToPath } from "url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default (app) => {
   app.use(morgan("dev"));
@@ -11,13 +16,13 @@ export default (app) => {
   app.use(bodyparser.json());
   app.use(cors());
 
+  app.use(express.static(path.join(__dirname, "public")));
+
   app.use("/api", routerAPI);
 
   /// catch 404 and forward to error handler
   app.use((req, res, next) => {
-    const err = new Error("Not Found");
-    err["status"] = 404;
-    next(err);
+    throw new ServerError("Not found", 404);
   });
 
   //Error Handling
