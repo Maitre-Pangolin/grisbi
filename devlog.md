@@ -136,3 +136,11 @@ SHOULD REFACTOR CONTROLLERS DB CALL => DRY
 Should modify http res status.
 
 Implemented put and delete on expenses and refactored some routes
+
+Initialized front-end
+
+## 2021-12-13
+
+Worked on resume / Github / Linkedin
+
+Installed front-end dependencies
