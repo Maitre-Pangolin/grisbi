@@ -3,6 +3,15 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import config from "../../config/index.js";
 import { ServerError } from "../../utils/serverError.js";
+import { insertRefreshToken, modifyRefreshTokenById } from "../db/auth.js";
+
+const generateAccessToken = (id) => {
+  return jwt.sign({ id }, config.token_secret, { expiresIn: "15min" });
+};
+
+const generateRefreshToken = (id) => {
+  return jwt.sign({ id }, config.refresh_token_secret, { expiresIn: "2d" });
+};
 
 export const signIn = async (req, res, next) => {
   const { email, password } = req.user;
@@ -13,10 +22,28 @@ export const signIn = async (req, res, next) => {
 
     if (!isMatchedPassword) throw new ServerError("Wrong Password", 400);
 
-    const token = jwt.sign({ id: user.id }, config.token_secret);
-    res.header("auth-token", token).json(user);
+    const accessToken = generateAccessToken(user.id);
+    const refreshToken = generateRefreshToken(user.id);
+    await insertRefreshToken(refreshToken, user.id);
+    res
+      .header({ "access-token": accessToken, "refresh-token": refreshToken })
+      .send();
   } catch (error) {
     next(error);
+  }
+};
+
+export const refresh = async (req, res, next) => {
+  try {
+    //should remove
+    const accessToken = generateAccessToken(req.userId);
+    const refreshToken = generateRefreshToken(req.userId);
+    await modifyRefreshTokenById(refreshToken, req.userId);
+    res
+      .header({ "access-token": accessToken, "refresh-token": refreshToken })
+      .send();
+  } catch (error) {
+    console.log(error);
   }
 };
 

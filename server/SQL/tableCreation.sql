@@ -2,6 +2,7 @@ DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS categories CASCADE;
 DROP TABLE IF EXISTS expenses;
 DROP TABLE IF EXISTS budgets;
+DROP TABLE IF EXISTS refresh_token;
 
 CREATE TABLE "users" (
   "id" SERIAL PRIMARY KEY,
@@ -34,6 +35,11 @@ CREATE TABLE "budgets" (
   "id" SERIAL PRIMARY KEY,
   "amount" money,
   "month" date,
+  "user_id" int REFERENCES users(id)
+);
+
+CREATE TABLE "refresh_token" (
+  "token" varchar(200) PRIMARY KEY,
   "user_id" int REFERENCES users(id)
 );
 
