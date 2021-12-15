@@ -143,4 +143,29 @@ Initialized front-end
 
 Worked on resume / Github / Linkedin
 
-Installed front-end dependencies
+Installed front-end dependencies.
+
+Brush-up on front-end auth best practices, local vs session storage vs cookies. Auth to redux
+
+Create sign-in form with MUI, need to implements logics.
+
+## 2021-12-14
+
+Sending sign in data in plain text over http post seems like a bad practice. After reading thats a reason https was invented , so need SSL certificate on server-side, this is a story for another time, I should just put a disclaimer for now, saying that this app is for training purpose so use bogus password.
+
+Also password/user can / should also be provided via authorization headers usine BASE64.
+
+Let's create a reducer for user-sign-in.
+
+Component for sign-in and reducer functionnal, need to implement error handling and token stockage.
+
+Remove password from signin res on server side. For now it return nothing except a jwt in header.
+
+Alright, I'm clear on how the whole refresh token vs access token things should be implemented, but still foggy on how to store them in the front localSession vs Cookies, both seems to presents security issue that can only be adressed using https, XSS vulnerability.
+
+Implemented refresh_token in server-side and db storage.
+Now for front-end , going to store both token in localStorage for now.
+
+(NEED TO REFORMAT LINK)
+
+Token are now stored in localstorage, need to set up axios interceptor to add auth + automatic refresh. Also need to check for local storage data at refresh (app level useEffect, + redux action on auth ?)

@@ -14,20 +14,24 @@ const generateRefreshToken = (id) => {
 };
 
 export const signIn = async (req, res, next) => {
-  const { email, password } = req.user;
-
   try {
-    const user = await selectUserByEmail(email);
-    const isMatchedPassword = await bcrypt.compare(password, user.password);
+    const {
+      id,
+      email,
+      user_name: username,
+      created_at: createdAt,
+      password,
+    } = await selectUserByEmail(req.user.email);
+    const isMatchedPassword = await bcrypt.compare(req.user.password, password);
 
     if (!isMatchedPassword) throw new ServerError("Wrong Password", 400);
 
-    const accessToken = generateAccessToken(user.id);
-    const refreshToken = generateRefreshToken(user.id);
-    await insertRefreshToken(refreshToken, user.id);
+    const accessToken = generateAccessToken(id);
+    const refreshToken = generateRefreshToken(id);
+    await insertRefreshToken(refreshToken, id);
     res
       .header({ "access-token": accessToken, "refresh-token": refreshToken })
-      .send();
+      .json({ id, email, username, createdAt });
   } catch (error) {
     next(error);
   }

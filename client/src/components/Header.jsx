@@ -11,10 +11,10 @@ import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Menu } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const pages = ["Add Expense", "Current Month", "Monthly"];
 const settings = ["Profile", "Logout"];
-const login = false;
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -28,7 +28,6 @@ const Header = () => {
   };
 
   const handleCloseNavMenu = (event) => {
-    //console.log(event);
     setAnchorElNav(null);
   };
 
@@ -45,7 +44,7 @@ const Header = () => {
             noWrap
             component='div'
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
-            GRI$BI
+            <Link to='/'>GRI$BI</Link>
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>

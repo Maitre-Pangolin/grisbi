@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   TextField,
   Container,
@@ -11,22 +11,41 @@ import {
 } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import IconButton from "@mui/material/IconButton";
-
 import { Link } from "react-router-dom";
+import emailValidator from "email-validator";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  signinThunk,
+  resetLoginError,
+  selectIsError,
+  setLoginError,
+  selectIsLogin,
+} from "../features/auth/authSlice";
+import { useNavigate } from "react-router";
 
 const Signin = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
-  const [isError, setIsError] = useState(true);
+  const isError = useSelector(selectIsError);
+  const isLogin = useSelector(selectIsLogin);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (isLogin) navigate("/");
+  }, [isLogin, navigate]);
 
   const handleChange = ({ target }) => {
     setFormData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
 
   const handleSubmit = () => {
+    console.log(formData);
+    if (emailValidator.validate(formData.email) && formData.password !== "") {
+      dispatch(signinThunk(formData));
+    } else {
+      dispatch(setLoginError());
+    }
     setFormData({ email: "", password: "" });
-    setIsError(true);
-    //IF NOT EMAIL FORMAT OR EMPTY PASSWORD =>ERROR
-    // DISPATCH USER LOGIN
   };
 
   return (
@@ -50,7 +69,7 @@ const Signin = () => {
                   color='inherit'
                   size='small'
                   onClick={() => {
-                    setIsError(false);
+                    dispatch(resetLoginError());
                   }}>
                   <CloseIcon fontSize='inherit' />
                 </IconButton>
