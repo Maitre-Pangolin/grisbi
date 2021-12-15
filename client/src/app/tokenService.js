@@ -11,13 +11,13 @@ export const setTokens = (tokens) => {
   localStorage.setItem("tokens", JSON.stringify(tokens));
 };
 
-export const refreshTokens = async (refreshToken) => {
-  if (isTokenExpired(refreshToken)) return clearTokens();
+export const refreshTokens = async (prevRefreshToken) => {
+  if (isTokenExpired(prevRefreshToken)) return clearTokens();
 
-  const response = await refresh(refreshToken);
-  const { "access-token": newAccessToken, "refresh-token": newRefreshToken } =
+  const response = await refresh(prevRefreshToken);
+  const { "access-token": accessToken, "refresh-token": refreshToken } =
     response.headers;
-  setTokens({ newAccessToken, newRefreshToken });
+  setTokens({ accessToken, refreshToken });
 };
 
 export const getAccessToken = () =>

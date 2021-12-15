@@ -10,7 +10,7 @@ import {
   validateExpense,
   validateExpenseUserId,
 } from "../middlewares/expenses.js";
-import { isAuth } from "../middlewares/isAuth.js";
+import { isAuth } from "../middlewares/auth.js";
 
 const router = Router();
 

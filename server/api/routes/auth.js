@@ -6,11 +6,12 @@ import {
   refresh,
   logout,
 } from "../controllers/auth.js";
-import { isAuth } from "../middlewares/isAuth.js";
+
 import {
   validateRefresh,
   validateSignin,
   validateSignup,
+  isAuth,
 } from "../middlewares/auth.js";
 
 const router = Router();

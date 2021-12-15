@@ -49,7 +49,7 @@ export const signIn = async (req, res, next) => {
 
 export const logout = async (req, res, next) => {
   try {
-    await deleteRefreshTokenById(req.userId);
+    await deleteRefreshTokenById(req.user.id);
     res.send();
   } catch (error) {
     next(error);
@@ -58,9 +58,9 @@ export const logout = async (req, res, next) => {
 
 export const refresh = async (req, res, next) => {
   try {
-    const accessToken = generateAccessToken(req.userId);
-    const refreshToken = generateRefreshToken(req.userId);
-    await modifyRefreshTokenById(refreshToken, req.userId);
+    const accessToken = generateAccessToken({ id: req.user.id });
+    const refreshToken = generateRefreshToken(req.user);
+    await modifyRefreshTokenById(refreshToken, req.user.id);
     res
       .header({ "access-token": accessToken, "refresh-token": refreshToken })
       .send();

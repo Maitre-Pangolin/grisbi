@@ -20,9 +20,12 @@ export const validateRefresh = async (req, res, next) => {
     const refreshToken = req.header("refresh-token");
     if (!refreshToken)
       throw new ServerError("Access Denied - No refresh token", 401);
-    const verified = jwt.verify(refreshToken, config.refresh_token_secret);
-    req.userId = verified.id;
-    const dbToken = await selectRefreshTokenById(verified.id);
+    const { id, email, username, createdAt } = jwt.verify(
+      refreshToken,
+      config.refresh_token_secret
+    );
+    req.user = { id, email, username, createdAt };
+    const dbToken = await selectRefreshTokenById(id);
     if (dbToken !== refreshToken)
       throw new ServerError("Refresh token do not match", 403);
     next();
@@ -53,4 +56,17 @@ export const validateSignup = async (req, res, next) => {
     password,
   };
   next();
+};
+
+export const isAuth = (req, res, next) => {
+  const token = req.header("Authorization").split(" ")[1]; // Bearer xxxx
+  if (!token) throw new ServerError("Access Denied", 401);
+
+  try {
+    const verified = jwt.verify(token, config.token_secret);
+    req.userId = verified.id;
+    next();
+  } catch (error) {
+    next(error);
+  }
 };
