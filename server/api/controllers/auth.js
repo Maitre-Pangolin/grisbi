@@ -3,7 +3,11 @@ import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import config from "../../config/index.js";
 import { ServerError } from "../../utils/serverError.js";
-import { insertRefreshToken, modifyRefreshTokenById } from "../db/auth.js";
+import {
+  deleteRefreshTokenById,
+  insertRefreshToken,
+  modifyRefreshTokenById,
+} from "../db/auth.js";
 
 const generateAccessToken = (data) => {
   return jwt.sign(data, config.token_secret, { expiresIn: "15min" });
@@ -33,10 +37,20 @@ export const signIn = async (req, res, next) => {
       username,
       createdAt,
     });
+    await deleteRefreshTokenById(id);
     await insertRefreshToken(refreshToken, id);
     res
       .header({ "access-token": accessToken, "refresh-token": refreshToken })
       .send();
+  } catch (error) {
+    next(error);
+  }
+};
+
+export const logout = async (req, res, next) => {
+  try {
+    await deleteRefreshTokenById(req.userId);
+    res.send();
   } catch (error) {
     next(error);
   }

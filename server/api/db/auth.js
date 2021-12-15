@@ -4,8 +4,6 @@ import { ServerError } from "../../utils/serverError.js";
 export const deleteRefreshTokenById = async (id) => {
   const queryString = `DELETE FROM refresh_token WHERE user_id = $1 RETURNING *`;
   const { rows } = await queryDB(queryString, [id]);
-  if (rows.length) return rows[0];
-  throw new ServerError("Not Found - Refresh Token does not exists", 400);
 };
 
 export const selectRefreshTokenById = async (id) => {

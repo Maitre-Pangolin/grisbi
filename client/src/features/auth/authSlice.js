@@ -21,6 +21,7 @@ const logoutThunk = createAsyncThunk("auth/logout", async () => {
   const refreshToken = getRefreshToken();
   clearTokens();
   try {
+    console.log("Im fresh", refreshToken);
     await logout(refreshToken);
   } catch (error) {
     console.log(error);

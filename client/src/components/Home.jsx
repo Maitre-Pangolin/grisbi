@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import { selectIsLogin, selectUser } from "../features/auth/authSlice";
 import SigninForm from "../features/auth/SigninForm";
-import { Container } from "@mui/material";
+import { Container, Button } from "@mui/material";
 
 const Home = () => {
   const isLogin = useSelector(selectIsLogin);
@@ -13,7 +13,11 @@ const Home = () => {
       <SigninForm />
     </Container>
   ) : (
-    <h1>Logged</h1>
+    <Container sx={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+      <h1>Logged</h1>
+      <Button variant='contained'>Check token refresh</Button>
+      <Button variant='contained'>Check access token works</Button>
+    </Container>
   );
 };
 
