@@ -5,12 +5,12 @@ import config from "../../config/index.js";
 import { ServerError } from "../../utils/serverError.js";
 import { insertRefreshToken, modifyRefreshTokenById } from "../db/auth.js";
 
-const generateAccessToken = (id) => {
-  return jwt.sign({ id }, config.token_secret, { expiresIn: "15min" });
+const generateAccessToken = (data) => {
+  return jwt.sign(data, config.token_secret, { expiresIn: "15min" });
 };
 
-const generateRefreshToken = (id) => {
-  return jwt.sign({ id }, config.refresh_token_secret, { expiresIn: "2d" });
+const generateRefreshToken = (data) => {
+  return jwt.sign(data, config.refresh_token_secret, { expiresIn: "2d" });
 };
 
 export const signIn = async (req, res, next) => {
@@ -26,12 +26,17 @@ export const signIn = async (req, res, next) => {
 
     if (!isMatchedPassword) throw new ServerError("Wrong Password", 400);
 
-    const accessToken = generateAccessToken(id);
-    const refreshToken = generateRefreshToken(id);
+    const accessToken = generateAccessToken({ id });
+    const refreshToken = generateRefreshToken({
+      id,
+      email,
+      username,
+      createdAt,
+    });
     await insertRefreshToken(refreshToken, id);
     res
       .header({ "access-token": accessToken, "refresh-token": refreshToken })
-      .json({ id, email, username, createdAt });
+      .send();
   } catch (error) {
     next(error);
   }
@@ -39,7 +44,6 @@ export const signIn = async (req, res, next) => {
 
 export const refresh = async (req, res, next) => {
   try {
-    //should remove
     const accessToken = generateAccessToken(req.userId);
     const refreshToken = generateRefreshToken(req.userId);
     await modifyRefreshTokenById(refreshToken, req.userId);

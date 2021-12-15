@@ -12,41 +12,63 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Menu } from "@mui/material";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  logoutThunk,
+  selectIsLogin,
+  selectUser,
+} from "../features/auth/authSlice";
+import { useNavigate } from "react-router";
 
 const pages = ["Add Expense", "Current Month", "Monthly"];
-const settings = ["Profile", "Logout"];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const isLogin = useSelector(selectIsLogin);
+  const user = useSelector(selectUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
-  };
-  const handleOpenUserMenu = (event) => {
-    setAnchorElUser(event.currentTarget);
   };
 
   const handleCloseNavMenu = (event) => {
     setAnchorElNav(null);
   };
 
-  const handleCloseUserMenu = () => {
-    setAnchorElUser(null);
+  const handleAvatarClick = () => {
+    console.log("Click");
+    isLogin ? dispatch(logoutThunk()) : navigate("/signin");
   };
 
   return (
-    <AppBar position='static'>
+    <AppBar position='static' sx={{}}>
       <Container maxWidth='xl'>
         <Toolbar disableGutters>
+          {/*MEDIUM DISPLAY APP BAR*/}
           <Typography
             variant='h6'
             noWrap
-            component='div'
-            sx={{ mr: 2, display: { xs: "none", md: "flex" } }}>
-            <Link to='/'>GRI$BI</Link>
+            component={Link}
+            to={"/"}
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+            }}>
+            GRI$BI
           </Typography>
-
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
+            {pages.map((page) => (
+              <Button
+                key={page}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}>
+                {page}
+              </Button>
+            ))}
+          </Box>
+          {/*SMALL DISPLAY APP BAR*/}
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
               size='large'
@@ -86,46 +108,15 @@ const Header = () => {
             noWrap
             component='div'
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            GRI$BI
+            <Link to='/'>GRI$BI</Link>
           </Typography>
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-            {pages.map((page) => (
-              <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}>
-                {page}
-              </Button>
-            ))}
-          </Box>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title='Open settings'>
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt='Remy Sharp' src='/static/images/avatar/2.jpg' />
+            <Tooltip title={isLogin ? "Log Out" : "Log In"}>
+              <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
+                <Avatar>{user?.username ? user?.username[0] : null}</Avatar>
               </IconButton>
             </Tooltip>
-            <Menu
-              sx={{ mt: "45px" }}
-              id='menu-appbar'
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: "top",
-                horizontal: "right",
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}>
-              {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>{setting}</Typography>
-                </MenuItem>
-              ))}
-            </Menu>
           </Box>
         </Toolbar>
       </Container>

@@ -39,7 +39,7 @@ CREATE TABLE "budgets" (
 );
 
 CREATE TABLE "refresh_token" (
-  "token" varchar(200) PRIMARY KEY,
+  "token" varchar(400) PRIMARY KEY,
   "user_id" int REFERENCES users(id)
 );
 

@@ -1,22 +1,34 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { signin } from "../../app/api";
+import { signin, logout } from "../../app/api";
+import {
+  getPayloadFromToken,
+  getRefreshToken,
+  clearTokens,
+  setTokens,
+} from "../../app/tokenService";
 
-// First, create the thunk
-export const signinThunk = createAsyncThunk(
-  "auth/signin",
-  async (data, thunkAPI) => {
-    const response = await signin(data);
-    //console.log("Thunk", response);
-    const { "access-token": accessToken, "refresh-token": refreshToken } =
-      response.headers;
-    //TOKEN STORING
-    const user = { ...response.data, accessToken, refreshToken };
-    localStorage.setItem("user", JSON.stringify(user));
-    return response.data;
+const signinThunk = createAsyncThunk("auth/signin", async (data) => {
+  const response = await signin(data);
+  const { "access-token": accessToken, "refresh-token": refreshToken } =
+    response.headers;
+  setTokens({ accessToken, refreshToken });
+  const stockedRefreshToken = getRefreshToken();
+  const user = getPayloadFromToken(stockedRefreshToken);
+  return user;
+});
+
+const logoutThunk = createAsyncThunk("auth/logout", async () => {
+  const refreshToken = getRefreshToken();
+  clearTokens();
+  try {
+    await logout(refreshToken);
+  } catch (error) {
+    console.log(error);
   }
-);
 
-// Then, handle actions in your reducers:
+  return;
+});
+
 const authSlice = createSlice({
   name: "auth",
   initialState: {
@@ -25,12 +37,16 @@ const authSlice = createSlice({
     user: {},
   },
   reducers: {
-    // standard reducer logic, with auto-generated action types per reducer
     resetLoginError: (state) => {
       state.loginError = false;
     },
     setLoginError: (state) => {
       state.loginError = true;
+    },
+    setUser: (state, action) => {
+      state.loginError = false;
+      state.isSignIn = true;
+      state.user = { ...action.payload };
     },
   },
   extraReducers: (builder) => {
@@ -40,13 +56,20 @@ const authSlice = createSlice({
       state.loginError = false;
       state.user = { ...action.payload };
     });
-    builder.addCase(signinThunk.rejected, (state, action) => {
+    builder.addCase(signinThunk.rejected, (state) => {
       state.loginError = true;
+    });
+
+    builder.addCase(logoutThunk.fulfilled, (state) => {
+      state.isSignIn = false;
+      state.loginError = false;
+      state.user = {};
     });
   },
 });
 
-export const { resetLoginError, setLoginError } = authSlice.actions;
+export const { resetLoginError, setLoginError, setUser } = authSlice.actions;
+export { signinThunk, logoutThunk };
 export default authSlice.reducer;
 export const selectIsError = (state) => state.auth.loginError;
 export const selectUser = (state) => state.auth.user;
