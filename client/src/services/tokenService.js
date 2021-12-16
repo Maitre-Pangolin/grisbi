@@ -1,5 +1,5 @@
 import jwt from "jsonwebtoken";
-import { refresh } from "./api";
+import { refresh } from "../api/authAPI";
 
 export const isTokenExpired = (token) => {
   const currentDate = new Date();

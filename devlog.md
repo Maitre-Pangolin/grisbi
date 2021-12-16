@@ -169,3 +169,24 @@ Now for front-end , going to store both token in localStorage for now.
 (NEED TO REFORMAT LINK)
 
 Token are now stored in localstorage, need to set up axios interceptor to add auth + automatic refresh. Also need to check for local storage data at refresh (app level useEffect, + redux action on auth ?)
+
+## 2021-12-15
+
+Refactored the auth process on the front-end, added a token service to deal with the local storage interaction. added a logout functionnaility.
+
+Changed routing structure. Added a login form component to be reused. Changed home component and add bar to validate proper login.
+
+Implemented logout route on back-end, fixed issue with multiple refresh token per user allowed in the db. Now unique field, plus delete operation prior to creating and stocking a new refresh token.
+
+Auth process  seems fully functionnal for now! Might be good to add (github, google + logging capability)
+
+Refactoring folder structure for srevices and api.
+
+Validated the access to protected ressources using access token on the fetchExpensesByMonth route . (Now need to implement automatic refresh)
+
+Token expiry works , set to 20s on access for testing.
+Automatic refresh on axios interceptor.
+
+SHOULD TEST WHAT HAPPENS ON REFRESH TOKEN EXPIRY => SHOULD LOGOUT AND ASK FOR LOGIN
+
+stop for today.

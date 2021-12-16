@@ -59,6 +59,8 @@ export const validateSignup = async (req, res, next) => {
 };
 
 export const isAuth = (req, res, next) => {
+  if (!req.header("Authorization"))
+    throw new ServerError("Access Denied - No access token", 401);
   const token = req.header("Authorization").split(" ")[1]; // Bearer xxxx
   if (!token) throw new ServerError("Access Denied", 401);
 

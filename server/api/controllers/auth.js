@@ -10,7 +10,7 @@ import {
 } from "../db/auth.js";
 
 const generateAccessToken = (data) => {
-  return jwt.sign(data, config.token_secret, { expiresIn: "15min" });
+  return jwt.sign(data, config.token_secret, { expiresIn: "5min" });
 };
 
 const generateRefreshToken = (data) => {

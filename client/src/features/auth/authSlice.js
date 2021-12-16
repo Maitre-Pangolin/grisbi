@@ -1,11 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { signin, logout } from "../../app/api";
+import { signin, logout } from "../../api/authAPI";
 import {
   getPayloadFromToken,
   getRefreshToken,
   clearTokens,
   setTokens,
-} from "../../app/tokenService";
+} from "../../services/tokenService";
 
 const signinThunk = createAsyncThunk("auth/signin", async (data) => {
   const response = await signin(data);
@@ -21,7 +21,6 @@ const logoutThunk = createAsyncThunk("auth/logout", async () => {
   const refreshToken = getRefreshToken();
   clearTokens();
   try {
-    console.log("Im fresh", refreshToken);
     await logout(refreshToken);
   } catch (error) {
     console.log(error);

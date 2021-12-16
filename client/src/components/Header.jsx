@@ -38,7 +38,6 @@ const Header = () => {
   };
 
   const handleAvatarClick = () => {
-    console.log("Click");
     isLogin ? dispatch(logoutThunk()) : navigate("/signin");
   };
 

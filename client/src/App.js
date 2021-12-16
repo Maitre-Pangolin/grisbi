@@ -12,7 +12,7 @@ import {
   getPayloadFromToken,
   getRefreshToken,
   isTokenExpired,
-} from "./app/tokenService";
+} from "./services/tokenService";
 
 function App() {
   const dispatch = useDispatch();

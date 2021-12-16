@@ -40,7 +40,7 @@ CREATE TABLE "budgets" (
 
 CREATE TABLE "refresh_token" (
   "token" varchar(400) PRIMARY KEY,
-  "user_id" int REFERENCES users(id)
+  "user_id" int UNIQUE REFERENCES users(id)
 );
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO grisbi_admin;
