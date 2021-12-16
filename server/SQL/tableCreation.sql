@@ -17,8 +17,7 @@ CREATE TABLE "users" (
 
 CREATE TABLE "categories" (
   "id" SERIAL PRIMARY KEY,
-  "name" varchar(50),
-  "icon_id" integer
+  "name" varchar(50)
 );
 
 CREATE TABLE "expenses" (

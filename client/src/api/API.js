@@ -6,6 +6,8 @@ import {
   refreshTokens,
 } from "../services/tokenService";
 
+export const getCategories = () => axios.get("/api/categories");
+
 const axiosJWT = axios.create();
 
 axiosJWT.interceptors.request.use(async (req) => {

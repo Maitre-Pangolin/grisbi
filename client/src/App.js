@@ -13,11 +13,14 @@ import {
   getRefreshToken,
   isTokenExpired,
 } from "./services/tokenService";
+import { fetchCategories } from "./features/categories/categorySlice";
+import Dev from "./components/Dev";
 
 function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    dispatch(fetchCategories());
     const refreshToken = getRefreshToken();
     if (!refreshToken) return;
     if (isTokenExpired(refreshToken)) clearTokens();
@@ -34,6 +37,7 @@ function App() {
             <Route path='/' element={<Home />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/signup' element={<Signup />} />
+            <Route path='/dev' element={<Dev />} />
             <Route path='*' element={<h1>Not found</h1>}></Route>
           </Routes>
         </main>
