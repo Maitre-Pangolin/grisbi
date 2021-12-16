@@ -27,8 +27,15 @@ export default (app) => {
 
   //Error Handling
   app.use((err, req, res, next) => {
-    logger.log(err.status, err.message);
     res.status(err.status || 500);
+    logger.log("Express error handler : ", err.status, err.message);
+
+    if (err.status == 409 && err.message.match(/"users_(.*)_key"/)) {
+      return res.json({
+        error: err.message,
+        duplicate: err.message.match(/"users_(.*)_key"/)[1],
+      });
+    }
     res.json({
       errors: {
         message: err.message,

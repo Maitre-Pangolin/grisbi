@@ -70,16 +70,17 @@ export const refresh = async (req, res, next) => {
 };
 
 export const signUp = async (req, res, next) => {
-  const { firstName, lastName, userName, email, password } = req.user;
-  const userParam = [firstName, lastName, userName, email, password];
+  const { firstname, lastname, username, email, password } = req.user;
+  const userParam = [firstname, lastname, username, email, password];
   try {
     const user = await createUser(userParam);
     res.json(user);
   } catch (error) {
+    error.status = error.status || 409;
     next(error);
   }
 };
-
+/*
 export const getUserById = async (req, res, next) => {
   try {
     const { id, first_name, last_name, user_name, email } =
@@ -90,3 +91,4 @@ export const getUserById = async (req, res, next) => {
     next(error);
   }
 };
+*/

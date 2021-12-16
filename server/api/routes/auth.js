@@ -1,11 +1,5 @@
 import { Router } from "express";
-import {
-  getUserById,
-  signIn,
-  signUp,
-  refresh,
-  logout,
-} from "../controllers/auth.js";
+import { signIn, signUp, refresh, logout } from "../controllers/auth.js";
 
 import {
   validateRefresh,
@@ -20,7 +14,7 @@ router.post("/signin", validateSignin, signIn);
 router.post("/refresh", validateRefresh, refresh);
 router.delete("/logout", validateRefresh, logout);
 router.post("/signup", validateSignup, signUp);
-
+/*
 router.get("/me", isAuth, getUserById);
-
+*/
 export default router;
