@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { selectIsLogin, selectUser } from "../features/auth/authSlice";
+import { selectIsLogin } from "../features/auth/authSlice";
 import SigninForm from "../features/auth/SigninForm";
 import { Container, Button } from "@mui/material";
 import {

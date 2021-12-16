@@ -190,3 +190,14 @@ Automatic refresh on axios interceptor.
 SHOULD TEST WHAT HAPPENS ON REFRESH TOKEN EXPIRY => SHOULD LOGOUT AND ASK FOR LOGIN
 
 stop for today.
+
+## 2021-12-16
+
+Creating sign-up form.
+
+
+Sign up form completed, with error handling on empty form, wrong email format, plus server error handling on duplicate user name or email.
+
+Should add a sign-up completion on successful sign up. Done . Sign up complete.
+
+Going to lunch, let's work on the categories in DB, load categories on sign in and app login, and add the 'add expense form' to home 

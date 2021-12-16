@@ -90,6 +90,7 @@ const SigninForm = () => {
             type='password'
             label='Password'
             name='password'
+            autoComplete='on'
             variant='outlined'
             value={formData.password}
             onChange={handleChange}
