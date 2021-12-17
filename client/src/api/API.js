@@ -20,5 +20,11 @@ axiosJWT.interceptors.request.use(async (req) => {
   return req;
 });
 
-export const fetchExpensesByMonth = (keyMonth) =>
+export const getExpensesByMonth = (keyMonth) =>
   axiosJWT.get(`/api/expenses/month/${keyMonth}`);
+
+export const createExpense = (data) => axiosJWT.post(`api/expenses`, data);
+export const putExpense = (id, data) =>
+  axiosJWT.put(`api/expenses/${id}`, data);
+
+export const deleteExpense = (id) => axiosJWT.delete(`api/expenses/${id}`);
