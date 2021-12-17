@@ -55,7 +55,7 @@ const Signup = () => {
       setIsSignUp(true);
       setFormData(emptyForm);
     } catch (error) {
-      if (error.response.data.duplicate) {
+      if (error.response?.data.duplicate) {
         const { duplicate } = error.response.data;
         if (duplicate === "user_name")
           setError((prevState) => ({

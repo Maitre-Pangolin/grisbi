@@ -7,10 +7,13 @@ import {
   getTokens,
   refreshTokens,
 } from "../services/tokenService";
-import { fetchExpensesByMonth } from "../api/API.js";
+import { useDispatch } from "react-redux";
+import { fetchExpensesByMonth } from "../features/expenses/expenseSlice";
+import { getCurrentKeyMonth } from "../services/dateConversionService";
 
 const Dev = () => {
   const isLogin = useSelector(selectIsLogin);
+  const dispatch = useDispatch();
 
   const checkRefresh = async () => {
     console.log("Before", getTokens());
@@ -20,8 +23,9 @@ const Dev = () => {
 
   const checkAccessToken = async () => {
     try {
-      const { data } = await fetchExpensesByMonth("2021-12");
-      console.log(data);
+      // const { data } = await getExpensesByMonth("2021-01");
+      // console.log(data);
+      dispatch(fetchExpensesByMonth(getCurrentKeyMonth()));
     } catch (error) {}
   };
 
