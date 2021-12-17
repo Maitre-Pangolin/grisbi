@@ -26,8 +26,10 @@ export const validateRefresh = async (req, res, next) => {
     );
     req.user = { id, email, username, createdAt };
     const dbToken = await selectRefreshTokenById(id);
-    if (dbToken !== refreshToken)
+    if (dbToken !== refreshToken) {
+      console.log(dbToken, refreshToken);
       throw new ServerError("Refresh token do not match", 403);
+    }
     next();
   } catch (error) {
     next(error);

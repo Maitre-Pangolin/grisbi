@@ -8,7 +8,7 @@ export const insertExpense = async (expenseParams) => {
 };
 
 export const selectExpensesByMonth = async (userId, keyMonth) => {
-  const queryString = `SELECT * FROM expenses WHERE user_id=$1 AND key_month=$2;`;
+  const queryString = `SELECT id,user_id as "userId" , name,amount,date,key_month as "keyMonth", category_id as "categoryId" FROM expenses WHERE user_id=$1 AND key_month=$2 ORDER BY date DESC;`;
   const { rows } = await queryDB(queryString, [userId, keyMonth]);
   return rows;
 };
@@ -20,9 +20,9 @@ export const selectAllTotals = async (userId) => {
 };
 
 export const modifyExpenseById = async (expenseParams) => {
-  const queryString = `UPDATE expenses SET name =$2, amount=$3,date=$4,key_month=$5,category_id=$6 WHERE id=$1 RETURNING *;`;
+  const queryString = `UPDATE expenses SET name =$2, amount=$3,date=$4,key_month=$5,category_id=$6 WHERE id=$1 RETURNING id,user_id as "userId" , name,amount,date,key_month as "keyMonth", category_id as "categoryId";`;
   const { rows } = await queryDB(queryString, expenseParams);
-  return rows;
+  return rows[0];
 };
 
 export const selectExpenseById = async (id) => {

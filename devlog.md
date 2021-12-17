@@ -200,4 +200,20 @@ Sign up form completed, with error handling on empty form, wrong email format, p
 
 Should add a sign-up completion on successful sign up. Done . Sign up complete.
 
-Going to lunch, let's work on the categories in DB, load categories on sign in and app login, and add the 'add expense form' to home 
+Going to lunch, let's work on the categories in DB, load categories on app load, and add the 'add expense form' to home => DONE
+
+Next create the expense slice, contains the keyMonth of the month being worked on (by default current month => should be fetched when logged in and accesing home or current month page )
+
+## 2021-12-17
+
+Created expense slice, modified app loading , token validation to logout automaticcaly when no tokens are present or if token is expired or is not present in the DB.
+
+Addex Expense and Expenses components. select total selector.
+
+Need to redirect to proper location on added expense + code delete expense and modify expense logic.
+
+Delete and update function added, with redirection using useNaviagte from react-router
+
+Created route and compoenents for monthly expenses. 
+
+Need to fix categories and category icons.
