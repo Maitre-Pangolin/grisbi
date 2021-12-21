@@ -6,6 +6,7 @@ import {
   Typography,
   Container,
 } from "@mui/material";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useDispatch, useSelector } from "react-redux";
 /*import {
   createExpenseThunk,
@@ -14,7 +15,11 @@ import { useDispatch, useSelector } from "react-redux";
 } from "../features/Expenses/expensesSlice";*/
 import { selectAllCategories } from "../features/categories/categorySlice";
 import { getCurrentKeyMonth } from "../services/dateConversionService";
-import { addExpense, modifyExpense } from "../features/expenses/expenseSlice";
+import {
+  addExpense,
+  modifyExpense,
+  removeExpense,
+} from "../features/expenses/expenseSlice";
 import { useLocation, useNavigate } from "react-router";
 
 const emptyForm = {
@@ -80,6 +85,11 @@ const ExpenseForm = ({ expenseID, setExpenseID }) => {
     setError({ name: "", amount: "" });
   };
 
+  const handleDelete = () => {
+    dispatch(removeExpense(expense.id));
+    navigate(-1);
+  };
+
   const handleChange = ({ target }) => {
     if (error[target.name])
       setError((error) => ({ ...error, [target.name]: "" }));
@@ -102,6 +112,16 @@ const ExpenseForm = ({ expenseID, setExpenseID }) => {
         gap: "20px",
         mt: "50px",
       }}>
+      <Button
+        variant='outlined'
+        size='large'
+        startIcon={<ArrowBackIcon />}
+        sx={{ width: "fit-content" }}
+        onClick={() => {
+          navigate(-1);
+        }}>
+        Back
+      </Button>
       <Typography variant='h5'>
         {expense ? "Edit Expense" : "Add Expense"}
       </Typography>
@@ -153,15 +173,15 @@ const ExpenseForm = ({ expenseID, setExpenseID }) => {
         onChange={handleChange}></TextField>
 
       <Button variant='contained' size='large' onClick={handleSubmit}>
-        {expense ? "Update Expense" : "Create Expense"}
+        {expense ? "Update Expense" : "ADD Expense"}
       </Button>
       <Button
         variant='contained'
         size='large'
         color='error'
         disabled={!(formData.name || formData.id || formData.amount)}
-        onClick={handleClear}>
-        {"Clear"}
+        onClick={expense ? handleDelete : handleClear}>
+        {expense ? "Delete expense" : "Clear"}
       </Button>
     </Container>
   );

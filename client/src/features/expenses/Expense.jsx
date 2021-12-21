@@ -22,16 +22,20 @@ const Expense = ({ expense }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleDelete = () => {
+  const handleDelete = (event) => {
+    event.stopPropagation();
     dispatch(removeExpense(id));
   };
 
-  const handleModify = () => {
+  const handleModify = (event) => {
+    event.stopPropagation();
     navigate("/expense", { state: expense });
   };
 
   return (
-    <ListItem>
+    <ListItem
+      sx={{ padding: { xs: "4px 0px", sm: "8px 16px " } }}
+      onClick={handleModify}>
       <ListItemAvatar>
         <Avatar>{categoryIcons[category?.id - 1] || null}</Avatar>
       </ListItemAvatar>
@@ -46,13 +50,22 @@ const Expense = ({ expense }) => {
         secondary={date}
         sx={{ marginRight: "20px", textAlign: "right" }}
       />
-      <Divider orientation='vertical' variant='fullWidth' flexItem />
-      <ListItemIcon style={{ justifyContent: "center" }}>
+      <Divider
+        orientation='vertical'
+        variant='fullWidth'
+        flexItem
+        sx={{ display: { xs: "none", sm: "block" } }}
+      />
+      <ListItemIcon
+        style={{ justifyContent: "center" }}
+        sx={{ display: { xs: "none", sm: "block" } }}>
         <IconButton color='primary' onClick={handleModify}>
           <EditIcon />
         </IconButton>
       </ListItemIcon>
-      <ListItemIcon style={{ justifyContent: "center" }}>
+      <ListItemIcon
+        style={{ justifyContent: "center" }}
+        sx={{ display: { xs: "none", sm: "block" } }}>
         <IconButton color='error' onClick={handleDelete}>
           <DeleteIcon />
         </IconButton>

@@ -17,6 +17,8 @@ import { fetchCategories } from "./features/categories/categorySlice";
 import Dev from "./components/Dev";
 import ExpenseForm from "./components/ExpenseForm";
 import MonthlyExpenses from "./components/MonthlyExpenses";
+import AddButton from "./components/AddButton";
+import ROUTES from "./app/routes";
 
 function App() {
   const dispatch = useDispatch();
@@ -42,7 +44,7 @@ function App() {
         <Header />
         <main>
           <Routes>
-            <Route path='/' element={<Home />} />
+            <Route path={ROUTES.home()} element={<Home />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/signup' element={<Signup />} />
             <Route path='/expense' element={<ExpenseForm />} />
@@ -51,6 +53,7 @@ function App() {
             <Route path='*' element={<h1>Not found</h1>}></Route>
           </Routes>
         </main>
+        <AddButton />
       </div>
     </BrowserRouter>
   );

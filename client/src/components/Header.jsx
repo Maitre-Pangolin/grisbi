@@ -19,8 +19,14 @@ import {
   selectUser,
 } from "../features/auth/authSlice";
 import { useNavigate } from "react-router";
+import ROUTES from "../app/routes";
 
-const pages = ["Add Expense", "Current Month", "Monthly"];
+//const pages = ["Add Expense", "Current Month", "Monthly"];
+const pages = [
+  { label: "Add Expense", link: ROUTES.expense() },
+  { label: "Current Month", link: ROUTES.expense() },
+  { label: "Monthly", link: ROUTES.expense() },
+];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -49,8 +55,7 @@ const Header = () => {
           <Typography
             variant='h6'
             noWrap
-            component={Link}
-            to={"/"}
+            onClick={() => navigate("/")}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -60,10 +65,12 @@ const Header = () => {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             {pages.map((page) => (
               <Button
-                key={page}
-                onClick={handleCloseNavMenu}
-                sx={{ my: 2, color: "white", display: "block" }}>
-                {page}
+                key={page.label}
+                sx={{ my: 2, color: "white", display: "block" }}
+                onClick={() => {
+                  navigate(page.link);
+                }}>
+                {page.label}
               </Button>
             ))}
           </Box>
@@ -96,8 +103,8 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}>
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign='center'>{page}</Typography>
+                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                  <Typography textAlign='center'>{page.label}</Typography>
                 </MenuItem>
               ))}
             </Menu>

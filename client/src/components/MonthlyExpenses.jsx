@@ -8,9 +8,8 @@ import {
   fetchExpensesByMonth,
   selectKeyMonth,
 } from "../features/expenses/expenseSlice";
-import { getCurrentKeyMonth } from "../services/dateConversionService";
 import Expenses from "../features/expenses/Expenses";
-import { useParams, useNavigate, Navigate } from "react-router";
+import { useParams, useNavigate } from "react-router";
 
 const MonthlyExpenses = () => {
   const isLogin = useSelector(selectIsLogin);
@@ -34,7 +33,6 @@ const MonthlyExpenses = () => {
       {keyMonth ? <Expenses /> : null}
     </Container>
   );
-  return null;
 };
 
 export default MonthlyExpenses;
