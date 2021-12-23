@@ -216,4 +216,8 @@ Delete and update function added, with redirection using useNaviagte from react-
 
 Created route and compoenents for monthly expenses. 
 
-Need to fix categories and category icons.
+Need to fix categories and category icons. An add an add expense button.
+
+## 2021-12-20
+
+Back from week-end let's add the add expense / return button 
