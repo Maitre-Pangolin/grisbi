@@ -56,16 +56,12 @@ const Expense = ({ expense }) => {
         flexItem
         sx={{ display: { xs: "none", sm: "block" } }}
       />
-      <ListItemIcon
-        style={{ justifyContent: "center" }}
-        sx={{ display: { xs: "none", sm: "block" } }}>
+      <ListItemIcon sx={{ ml: "15px", display: { xs: "none", sm: "flex" } }}>
         <IconButton color='primary' onClick={handleModify}>
           <EditIcon />
         </IconButton>
       </ListItemIcon>
-      <ListItemIcon
-        style={{ justifyContent: "center" }}
-        sx={{ display: { xs: "none", sm: "block" } }}>
+      <ListItemIcon sx={{ display: { xs: "none", sm: "flex" } }}>
         <IconButton color='error' onClick={handleDelete}>
           <DeleteIcon />
         </IconButton>

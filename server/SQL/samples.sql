@@ -26,11 +26,29 @@ VALUES ('Walter','White','BlueKing','methisrad@gmail.com','$2a$10$dHXsb9Yo/NKokq
 INSERT INTO categories(name)
 VALUES ('Miscellaneous');
 INSERT INTO categories(name)
-VALUES ('Home');
+VALUES ('Housing & Utilities');
 INSERT INTO categories(name)
-VALUES ('Drinks');
+VALUES ('Transportation');
 INSERT INTO categories(name)
 VALUES ('Groceries');
+INSERT INTO categories(name)
+VALUES ('Restaurant & Take-Out');
+INSERT INTO categories(name)
+VALUES ('Medical & Healthcare');
+INSERT INTO categories(name)
+VALUES ('Sport');
+INSERT INTO categories(name)
+VALUES ('Recreation & Entertainement');
+INSERT INTO categories(name)
+VALUES ('Games');
+INSERT INTO categories(name)
+VALUES ('Clothing');
+INSERT INTO categories(name)
+VALUES ('Drinks');
+
+
+
+
 
 INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
 VALUES (1,'Loyer',700,'2021-12-05','2021-12',2);
