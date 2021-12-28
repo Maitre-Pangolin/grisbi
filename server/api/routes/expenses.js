@@ -18,7 +18,7 @@ router.use(isAuth);
 
 router.get("/totals", getMonthlyTotals);
 router.post("/", validateExpense, createExpense);
-router.get("/month/:keyMonth", getExpensesByMonth);
+router.get("/:keyMonth", getExpensesByMonth);
 router.put("/:id", validateExpense, validateExpenseUserId, putExpense);
 router.delete("/:id", validateExpenseUserId, removeExpenseById);
 

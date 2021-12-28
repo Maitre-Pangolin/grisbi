@@ -221,3 +221,23 @@ Need to fix categories and category icons. An add an add expense button.
 ## 2021-12-20
 
 Back from week-end let's add the add expense / return button 
+
+Improve responsivness and  worked on codecademy classes
+
+## 2021-12-23
+
+Worked on codecademy classes on tuesday. Back to the app let's implement budget in db and redux slice.
+
+Covid is that you ? Time for a test ...
+
+Lost all day in a great test queue by -20C , just great ...
+
+## 2021-12-27
+
+4 days later no result, what a superb display of efficiency and organization. 
+
+Implementing server side route for budget and going back to get tested.
+
+## 2021-12-28
+
+Created put and post route for budget, need to validate post.

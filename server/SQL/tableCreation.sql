@@ -31,10 +31,10 @@ CREATE TABLE "expenses" (
 );
 
 CREATE TABLE "budgets" (
-  "id" SERIAL PRIMARY KEY,
-  "amount" money,
-  "month" date,
-  "user_id" int REFERENCES users(id)
+  "amount" double precision,
+  "key_month" varchar(20),
+  "user_id" int REFERENCES users(id),
+	PRIMARY KEY (user_id,key_month)
 );
 
 CREATE TABLE "refresh_token" (

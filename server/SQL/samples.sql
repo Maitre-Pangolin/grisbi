@@ -63,6 +63,10 @@ INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
 VALUES (1,'Ampoules',87.2,'2021-12-03','2021-12',1);
 
 
+
+
+
+
 INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
 VALUES (2,'Loyer',750,'2021-12-05','2021-12',2);
 
@@ -84,3 +88,12 @@ VALUES (1,'Birra',87.2,'2021-07-08','2021-07',3);
 
 INSERT INTO expenses(user_id,name,amount,date,key_month,category_id)
 VALUES (1,'Ampoules',87.2,'2021-07-02','2021-07',1);
+
+INSERT INTO budgets(user_id,amount,key_month)
+VALUES (1,1300,'2021-12');
+
+INSERT INTO budgets(user_id,amount,key_month)
+VALUES (1,1000,'2021-11');
+
+INSERT INTO budgets(user_id,amount,key_month)
+VALUES (1,2000,'2021-08');
