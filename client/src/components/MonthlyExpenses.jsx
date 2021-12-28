@@ -10,6 +10,7 @@ import {
 } from "../features/expenses/expenseSlice";
 import Expenses from "../features/expenses/Expenses";
 import { useParams, useNavigate } from "react-router";
+import { fetchBudgetByMonth } from "../features/budgets/budgetsSlice";
 
 const MonthlyExpenses = () => {
   const isLogin = useSelector(selectIsLogin);
@@ -22,6 +23,7 @@ const MonthlyExpenses = () => {
     if (!params.keyMonth.match(/^[\d]{4}-[\d]{2}$/)) navigate("/");
     if (isLogin && keyMonth !== params.keyMonth)
       dispatch(fetchExpensesByMonth(params.keyMonth));
+    dispatch(fetchBudgetByMonth(params.keyMonth));
   }, [dispatch, isLogin, keyMonth]);
 
   return !isLogin ? (

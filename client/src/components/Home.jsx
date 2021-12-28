@@ -10,6 +10,7 @@ import {
 } from "../features/expenses/expenseSlice";
 import { getCurrentKeyMonth } from "../services/dateConversionService";
 import Expenses from "../features/expenses/Expenses";
+import { fetchBudgetByMonth } from "../features/budgets/budgetsSlice";
 
 const Home = () => {
   const isLogin = useSelector(selectIsLogin);
@@ -17,8 +18,10 @@ const Home = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (isLogin && keyMonth !== getCurrentKeyMonth())
+    if (isLogin && keyMonth !== getCurrentKeyMonth()) {
       dispatch(fetchExpensesByMonth(getCurrentKeyMonth()));
+      dispatch(fetchBudgetByMonth(getCurrentKeyMonth()));
+    }
   }, [dispatch, isLogin, keyMonth]);
   return !isLogin ? (
     <Container sx={{ width: { sm: 1, md: 1 / 2 }, mt: "50px" }}>
