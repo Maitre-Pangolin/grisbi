@@ -47,6 +47,13 @@ const SigninForm = () => {
     setFormData({ email: "", password: "" });
   };
 
+  const handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      handleSubmit();
+    }
+  };
+
   return (
     <Paper elevation={2} sx={{ pt: "10px" }}>
       <form>
@@ -94,6 +101,7 @@ const SigninForm = () => {
             variant='outlined'
             value={formData.password}
             onChange={handleChange}
+            onKeyPress={handleKeyPress}
           />
           <Button
             variant='contained'

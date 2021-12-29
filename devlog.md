@@ -240,4 +240,17 @@ Implementing server side route for budget and going back to get tested.
 
 ## 2021-12-28
 
-Created put and post route for budget, need to validate post.
+Created put and post route for budget. Validated
+Had to move for covid isolation, not a super productive last few days...
+
+Implemented monthly summary view.
+
+## 2021-12-29
+
+Fixed issue on expense creation , forgot to update the keyMonth when sending data to the server.
+
+Fixed issue on API routes, root for API needs to start with '/' or they will be preprended to the current route.
+
+Fixed issue on expense creation not displaying proper categories , again an issue with SQL snake_case to camelCase
+
+Add sign-in submission when pressing enter
