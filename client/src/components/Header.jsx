@@ -24,8 +24,8 @@ import ROUTES from "../app/routes";
 //const pages = ["Add Expense", "Current Month", "Monthly"];
 const pages = [
   { label: "Add Expense", link: ROUTES.expense() },
-  { label: "Current Month", link: ROUTES.expense() },
-  { label: "Monthly", link: ROUTES.expense() },
+  { label: "Current Month", link: ROUTES.currentMonthlyRoute() },
+  { label: "Monthly", link: ROUTES.monthsRoute() },
 ];
 
 const Header = () => {

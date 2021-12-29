@@ -25,9 +25,9 @@ export const getExpensesByMonth = (keyMonth) =>
 
 export const createExpense = (data) => axiosJWT.post(`api/expenses`, data);
 export const putExpense = (id, data) =>
-  axiosJWT.put(`api/expenses/${id}`, data);
+  axiosJWT.put(`/api/expenses/${id}`, data);
 
-export const deleteExpense = (id) => axiosJWT.delete(`api/expenses/${id}`);
+export const deleteExpense = (id) => axiosJWT.delete(`/api/expenses/${id}`);
 
 export const getBudgetByMonth = (keyMonth) =>
   axiosJWT.get(`/api/budgets/${keyMonth}`);
@@ -37,3 +37,5 @@ export const createBudget = (keyMonth, amount) =>
 
 export const putBudget = (keyMonth, amount) =>
   axiosJWT.put(`/api/budgets/${keyMonth}`, { amount });
+
+export const getMonthlyTotalsAndBudgets = () => axiosJWT.get(`api/monthly`);

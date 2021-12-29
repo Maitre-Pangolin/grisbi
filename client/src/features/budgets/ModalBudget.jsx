@@ -27,10 +27,11 @@ const ModalBudget = ({ isOpen, setIsOpen, budget }) => {
   }, [isOpen]);
 
   const handleSubmit = () => {
-    if (amount <= 0) setError("Budget amount should be positive");
+    if (amount <= 0) return setError("Budget amount should be positive");
     budget?.amount
       ? dispatch(modifyBudget({ keyMonth, amount }))
       : dispatch(setBudget({ keyMonth, amount }));
+    setIsOpen(false);
   };
 
   const handleChange = ({ target }) => {
