@@ -12,7 +12,10 @@ export const setTokens = (tokens) => {
 };
 
 export const refreshTokens = async (prevRefreshToken) => {
-  if (isTokenExpired(prevRefreshToken)) return clearTokens();
+  if (isTokenExpired(prevRefreshToken)) {
+    window.location.reload();
+    return clearTokens();
+  }
 
   const response = await refresh(prevRefreshToken);
   const { "access-token": accessToken, "refresh-token": refreshToken } =

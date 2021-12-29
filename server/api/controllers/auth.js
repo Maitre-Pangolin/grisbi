@@ -10,11 +10,11 @@ import {
 } from "../db/auth.js";
 
 const generateAccessToken = (data) => {
-  return jwt.sign(data, config.token_secret, { expiresIn: "30s" });
+  return jwt.sign(data, config.token_secret, { expiresIn: "5min" });
 };
 
 const generateRefreshToken = (data) => {
-  return jwt.sign(data, config.refresh_token_secret, { expiresIn: "1m" });
+  return jwt.sign(data, config.refresh_token_secret, { expiresIn: "30min" });
 };
 
 export const signIn = async (req, res, next) => {

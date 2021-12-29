@@ -254,3 +254,7 @@ Fixed issue on API routes, root for API needs to start with '/' or they will be 
 Fixed issue on expense creation not displaying proper categories , again an issue with SQL snake_case to camelCase
 
 Add sign-in submission when pressing enter
+
+Fix token expiry logic but should re route / change store on expiry , not sure how to do this.
+
+Added a window.location.refresh on token expiry.
