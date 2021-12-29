@@ -5,8 +5,8 @@ import Header from "./components/Header";
 import Home from "./components/Home";
 import Signin from "./components/Signin";
 import Signup from "./components/Signup";
-import { logoutThunk, setUser } from "./features/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { logoutThunk, selectIsLogin, setUser } from "./features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 import {
   clearTokens,
   getPayloadFromToken,
@@ -23,18 +23,21 @@ import MonthlyTotals from "./components/MonthlyTotals";
 
 function App() {
   const dispatch = useDispatch();
+  const isLogin = useSelector(selectIsLogin);
 
   useEffect(() => {
     dispatch(fetchCategories());
     (async () => {
       try {
         const refreshToken = getRefreshToken();
-        const user = getPayloadFromToken(refreshToken);
-        dispatch(setUser(user));
-        await refreshTokens(refreshToken);
+        if (refreshToken) {
+          const user = getPayloadFromToken(refreshToken);
+          dispatch(setUser(user));
+          await refreshTokens(refreshToken);
+        }
       } catch (error) {
         clearTokens();
-        dispatch(logoutThunk());
+        if (isLogin) dispatch(logoutThunk());
       }
     })();
   }, [dispatch]);

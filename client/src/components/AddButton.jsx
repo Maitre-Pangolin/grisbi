@@ -3,10 +3,14 @@ import { Fab } from "@mui/material";
 import DescriptionIcon from "@mui/icons-material/Description";
 import { useNavigate, useLocation } from "react-router";
 import ROUTES from "../app/routes";
+import { useSelector } from "react-redux";
+import { selectIsLogin } from "../features/auth/authSlice";
 
 const AddButton = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const isLogin = useSelector(selectIsLogin);
+  if (!isLogin) return null;
 
   return location.pathname === "/expense" ? null : (
     <Fab

@@ -9,9 +9,13 @@ import {
 } from "@mui/material";
 import React, { useEffect } from "react";
 import { useState } from "react";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getMonthlyTotalsAndBudgets } from "../api/API";
+import { selectIsLogin } from "../features/auth/authSlice";
 import { getDateStringFromKeyMonth } from "../services/dateConversionService";
+import { getAccessToken } from "../services/tokenService";
+import SigninForm from "../features/auth/SigninForm";
 
 const MonthlyTotals = () => {
   /*const months = [
@@ -21,6 +25,7 @@ const MonthlyTotals = () => {
 
   const [months, setMonths] = useState([]);
   const navigate = useNavigate();
+  const isLogin = useSelector(selectIsLogin);
 
   const fetchData = async () => {
     const { data } = await getMonthlyTotalsAndBudgets();
@@ -32,17 +37,14 @@ const MonthlyTotals = () => {
   };
 
   useEffect(() => {
-    fetchData();
+    if (getAccessToken() && isLogin) fetchData();
   }, []);
 
-  return (
-    /*<div>
-      {months.map((month) => (
-        <li key={month?.keyMonth}>
-          {month?.keyMonth} | Total :{month?.total} Budget :{month?.budget}{" "}
-        </li>
-      ))}
-      </div>*/
+  return !isLogin ? (
+    <Container sx={{ width: { sm: 1, md: 1 / 2 }, mt: "50px" }}>
+      <SigninForm />
+    </Container>
+  ) : (
     <List sx={{ width: "50%", m: "auto" }}>
       <ListSubheader>Monthly Totals</ListSubheader>
       <Divider />
