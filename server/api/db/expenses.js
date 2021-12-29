@@ -2,7 +2,7 @@ import { queryDB } from "../../loaders/db.js";
 import { ServerError } from "../../utils/serverError.js";
 
 export const insertExpense = async (expenseParams) => {
-  const queryString = `INSERT INTO expenses(user_id,name,amount,date,key_month,category_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING *;`;
+  const queryString = `INSERT INTO expenses(user_id,name,amount,date,key_month,category_id) VALUES ($1,$2,$3,$4,$5,$6) RETURNING id,user_id as "userId" , name,amount,date,key_month as "keyMonth", category_id as "categoryId";`;
   const { rows } = await queryDB(queryString, expenseParams);
   return rows[0];
 };

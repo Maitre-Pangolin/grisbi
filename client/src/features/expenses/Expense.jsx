@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector, useEffect } from "react-redux";
 import {
   ListItemIcon,
   ListItemText,
@@ -22,6 +22,9 @@ const Expense = ({ expense }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  /* console.log(expense);
+  console.log(category, categoryId);
+*/
   const handleDelete = (event) => {
     event.stopPropagation();
     dispatch(removeExpense(id));
@@ -42,7 +45,7 @@ const Expense = ({ expense }) => {
       <Divider orientation='vertical' variant='fullWidth' flexItem />
       <ListItemText
         primary={name}
-        secondary={category?.name || "Miscelleanous"}
+        secondary={category?.name}
         sx={{ marginLeft: "20px" }}
       />
       <ListItemText

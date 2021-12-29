@@ -17,6 +17,7 @@ const fetchExpensesByMonth = createAsyncThunk(
 
 const addExpense = createAsyncThunk("expense/addExpense", async (expense) => {
   const response = await createExpense(expense);
+  console.log(response.data);
   return response.data;
 });
 
@@ -46,7 +47,7 @@ const expenseSlice = createSlice({
     builder.addCase(
       addExpense.fulfilled,
       (state, action) => {
-        if (action.payload["key_month"] === state.keyMonth) {
+        if (action.payload.keyMonth === state.keyMonth) {
           state.expenses.push(action.payload);
         }
       },
