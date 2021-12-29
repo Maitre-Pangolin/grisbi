@@ -9,7 +9,10 @@ import {
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useDispatch, useSelector } from "react-redux";
 import { selectAllCategories } from "../features/categories/categorySlice";
-import { getCurrentKeyMonth } from "../services/dateConversionService";
+import {
+  getCurrentKeyMonth,
+  getKeyMonthFromDateString,
+} from "../services/dateConversionService";
 import {
   addExpense,
   modifyExpense,
@@ -58,6 +61,7 @@ const ExpenseForm = ({ expenseID, setExpenseID }) => {
     if (!data.categoryId) {
       data.categoryId = 1;
     }
+    data.keyMonth = getKeyMonthFromDateString(data.date);
     if (isError) return;
 
     try {
@@ -66,13 +70,11 @@ const ExpenseForm = ({ expenseID, setExpenseID }) => {
         navigate(-1);
       } else {
         dispatch(addExpense(data));
-        navigate(-1); // push to datakeyMonth
+        navigate(-1);
       }
     } catch (error) {
       console.log(error);
     }
-
-    /*setExpenseID(null)*/
   };
 
   const handleClear = () => {
