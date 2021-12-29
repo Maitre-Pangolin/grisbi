@@ -258,3 +258,7 @@ Add sign-in submission when pressing enter
 Fix token expiry logic but should re route / change store on expiry , not sure how to do this.
 
 Added a window.location.refresh on token expiry.
+
+Fix decimals issue on amount input.
+
+Changed favicon and page title
