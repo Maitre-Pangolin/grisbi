@@ -93,13 +93,13 @@ const ExpenseForm = ({ expenseID, setExpenseID }) => {
     setFormData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
 
-  const handleAmountChange = ({ target }) => {
+  /*const handleAmountChange = ({ target }) => {
     if (error.amount) setError((error) => ({ ...error, amount: "" }));
     setFormData((prevState) => ({
       ...prevState,
       amount: parseInt(target.value, 10),
     }));
-  };
+  };*/
   if (!categories || !categories.length) return null;
   return (
     <Container
@@ -141,7 +141,7 @@ const ExpenseForm = ({ expenseID, setExpenseID }) => {
         name='amount'
         variant='standard'
         value={formData.amount}
-        onChange={handleAmountChange}
+        onChange={handleChange}
       />
       <TextField
         id='outlined-select-currency'
