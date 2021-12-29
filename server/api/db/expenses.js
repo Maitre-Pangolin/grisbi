@@ -14,7 +14,7 @@ export const selectExpensesByMonth = async (userId, keyMonth) => {
 };
 
 export const selectAllTotals = async (userId) => {
-  const queryString = `SELECT key_month,sum(amount) as total FROM expenses WHERE user_id=$1 GROUP BY key_month;`;
+  const queryString = `SELECT key_month as "keyMonth",sum(amount) as total FROM expenses WHERE user_id=$1 GROUP BY key_month;`;
   const { rows } = await queryDB(queryString, [userId]);
   return rows;
 };

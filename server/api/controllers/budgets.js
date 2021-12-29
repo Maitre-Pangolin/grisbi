@@ -32,7 +32,6 @@ export const updateBudget = async (req, res, next) => {
   if (!keyMonth.match(/^\d{4}-\d{2}$/gm))
     throw new ServerError("Invalid keyMonth", 400);
   try {
-    console.log(req.body);
     const budget = await modifyBudget(req.userId, amount, keyMonth);
     res.json({ budget });
   } catch (error) {

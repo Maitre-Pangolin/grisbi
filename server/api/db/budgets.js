@@ -7,6 +7,12 @@ export const selectBudgetByMonth = async (userId, keyMonth) => {
   return rows[0];
 };
 
+export const selectAllBudgets = async (userId) => {
+  const queryString = `SELECT  amount,key_month as "keyMonth" FROM budgets WHERE user_id=$1;`;
+  const { rows } = await queryDB(queryString, [userId]);
+  return rows;
+};
+
 export const insertBudget = async (userId, amount, keyMonth) => {
   const queryString = `INSERT INTO budgets(user_id,amount,key_month) VALUES ($1,$2,$3) RETURNING user_id as "userId",amount,key_month as "keyMonth";`;
   const { rows } = await queryDB(queryString, [userId, amount, keyMonth]);
