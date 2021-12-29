@@ -70,7 +70,7 @@ const ExpenseForm = ({ expenseID, setExpenseID }) => {
         navigate(-1);
       } else {
         dispatch(addExpense(data));
-        navigate(-1);
+        navigate(`/month/${data.keyMonth}`);
       }
     } catch (error) {
       console.log(error);

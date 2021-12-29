@@ -23,7 +23,7 @@ axiosJWT.interceptors.request.use(async (req) => {
 export const getExpensesByMonth = (keyMonth) =>
   axiosJWT.get(`/api/expenses/${keyMonth}`);
 
-export const createExpense = (data) => axiosJWT.post(`api/expenses`, data);
+export const createExpense = (data) => axiosJWT.post(`/api/expenses`, data);
 export const putExpense = (id, data) =>
   axiosJWT.put(`/api/expenses/${id}`, data);
 
@@ -38,4 +38,4 @@ export const createBudget = (keyMonth, amount) =>
 export const putBudget = (keyMonth, amount) =>
   axiosJWT.put(`/api/budgets/${keyMonth}`, { amount });
 
-export const getMonthlyTotalsAndBudgets = () => axiosJWT.get(`api/monthly`);
+export const getMonthlyTotalsAndBudgets = () => axiosJWT.get(`/api/monthly`);
