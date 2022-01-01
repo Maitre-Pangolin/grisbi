@@ -42,6 +42,9 @@ function App() {
     })();
   }, [dispatch]);
 
+  // AD HOC REDIRECT TO SIGNIN
+
+  // On home display login , when signin redirect to current month
   return (
     <BrowserRouter>
       <div className='App'>
@@ -51,14 +54,19 @@ function App() {
             <Route path={ROUTES.home()} element={<Home />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/signup' element={<Signup />} />
-            <Route path='/expense' element={<ExpenseForm />} />
-            <Route path='/month/:keyMonth' element={<MonthlyExpenses />} />
-            <Route path='/months' element={<MonthlyTotals />} />
-            <Route path='/dev' element={<Dev />} />
+            {isLogin && (
+              <>
+                <Route path='/expense' element={<ExpenseForm />} />
+                <Route path='/month/:keyMonth' element={<MonthlyExpenses />} />
+                <Route path='/months' element={<MonthlyTotals />} />
+                <Route path='/dev' element={<Dev />} />
+              </>
+            )}
+
             <Route path='*' element={<h1>Not found</h1>}></Route>
           </Routes>
         </main>
-        <AddButton />
+        {isLogin && <AddButton />}
       </div>
     </BrowserRouter>
   );
