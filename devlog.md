@@ -230,11 +230,11 @@ Worked on codecademy classes on tuesday. Back to the app let's implement budget 
 
 Covid is that you ? Time for a test ...
 
-Lost all day in a great test queue by -20C , just great ...
+Lost all day in a the test queue by -20C , just great ...
 
 ## 2021-12-27
 
-4 days later no result, what a superb display of efficiency and organization. 
+4 days later no result, a superb display of efficiency and organization. 
 
 Implementing server side route for budget and going back to get tested.
 
@@ -262,3 +262,5 @@ Added a window.location.refresh on token expiry.
 Fix decimals issue on amount input.
 
 Changed favicon and page title
+
+

@@ -22,9 +22,6 @@ const Expense = ({ expense }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  /* console.log(expense);
-  console.log(category, categoryId);
-*/
   const handleDelete = (event) => {
     event.stopPropagation();
     dispatch(removeExpense(id));

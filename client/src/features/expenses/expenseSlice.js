@@ -17,7 +17,6 @@ const fetchExpensesByMonth = createAsyncThunk(
 
 const addExpense = createAsyncThunk("expense/addExpense", async (expense) => {
   const response = await createExpense(expense);
-  console.log(response.data);
   return response.data;
 });
 
@@ -39,7 +38,6 @@ const expenseSlice = createSlice({
   initialState: { keyMonth: "", expenses: [] },
   reducers: {},
   extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(
       fetchExpensesByMonth.fulfilled,
       (state, action) => action.payload

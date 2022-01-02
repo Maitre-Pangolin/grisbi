@@ -25,8 +25,6 @@ const Dev = () => {
 
   const checkAccessToken = async () => {
     try {
-      // const { data } = await getExpensesByMonth("2021-01");
-      // console.log(data);
       dispatch(fetchExpensesByMonth(getCurrentKeyMonth()));
     } catch (error) {}
   };

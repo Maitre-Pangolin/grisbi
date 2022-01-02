@@ -22,6 +22,7 @@ import {
   selectIsLogin,
 } from "./authSlice";
 import { useNavigate } from "react-router";
+import { getCurrentKeyMonth } from "../../services/dateConversionService";
 
 const SigninForm = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -31,7 +32,7 @@ const SigninForm = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (isLogin) navigate("/");
+    if (isLogin) navigate(`/month/${getCurrentKeyMonth()}`);
   }, [isLogin, navigate]);
 
   const handleChange = ({ target }) => {
