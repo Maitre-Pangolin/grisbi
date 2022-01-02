@@ -87,7 +87,9 @@ const Signup = () => {
   };
 
   return (
-    <Paper elevation={2} sx={{ pt: "10px" }}>
+    <Paper
+      elevation={2}
+      sx={{ mt: "100px", width: { sm: 1, md: 1 / 2 }, marginX: "auto" }}>
       <form>
         <Container
           sx={{
@@ -95,7 +97,9 @@ const Signup = () => {
             flexDirection: "column",
             gap: "20px",
           }}>
-          <Typography variant='h5'>Sign up to Gri$bi</Typography>
+          <Typography variant='h5' sx={{ mt: "20px" }}>
+            Sign up to Gri$bi
+          </Typography>
           <Collapse in={isSignUp}>
             <Alert
               action={
