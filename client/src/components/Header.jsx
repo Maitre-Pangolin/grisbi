@@ -23,9 +23,8 @@ import ROUTES from "../app/routes";
 
 //const pages = ["Add Expense", "Current Month", "Monthly"];
 const pages = [
-  { label: "Add Expense", link: ROUTES.expense() },
   { label: "Current Month", link: ROUTES.currentMonthlyRoute() },
-  { label: "Monthly", link: ROUTES.monthsRoute() },
+  { label: "Monthly Totals", link: ROUTES.monthsRoute() },
 ];
 
 const Header = () => {
@@ -43,7 +42,7 @@ const Header = () => {
     setAnchorElNav(null);
   };
 
-  const handleAvatarClick = () => {
+  const handleButton = () => {
     isLogin ? dispatch(logoutThunk()) : navigate("/signin");
   };
 
@@ -55,7 +54,6 @@ const Header = () => {
           <Typography
             variant='h6'
             noWrap
-            onClick={() => navigate("/")}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -66,6 +64,7 @@ const Header = () => {
             {pages.map((page) => (
               <Button
                 key={page.label}
+                disabled={!isLogin}
                 sx={{ my: 2, color: "white", display: "block" }}
                 onClick={() => {
                   navigate(page.link);
@@ -103,7 +102,12 @@ const Header = () => {
                 display: { xs: "block", md: "none" },
               }}>
               {pages.map((page) => (
-                <MenuItem key={page.label} onClick={handleCloseNavMenu}>
+                <MenuItem
+                  key={page.label}
+                  onClick={() => {
+                    navigate(page.link);
+                    handleCloseNavMenu();
+                  }}>
                   <Typography textAlign='center'>{page.label}</Typography>
                 </MenuItem>
               ))}
@@ -114,15 +118,17 @@ const Header = () => {
             noWrap
             component='div'
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
-            <Link to='/'>GRI$BI</Link>
+            GRI$BI
           </Typography>
 
           <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title={isLogin ? "Log Out" : "Log In"}>
-              <IconButton onClick={handleAvatarClick} sx={{ p: 0 }}>
-                <Avatar>{user?.username ? user?.username[0] : null}</Avatar>
-              </IconButton>
-            </Tooltip>
+            <Button
+              variant='contained'
+              color={!isLogin ? "info" : "error"}
+              onClick={handleButton}
+              size='small'>
+              {!isLogin ? "Sign In" : "Sign Out"}
+            </Button>
           </Box>
         </Toolbar>
       </Container>
