@@ -1,20 +1,22 @@
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { selectIsLogin } from "../features/auth/authSlice";
-import SigninForm from "../features/auth/SigninForm";
 import { Container } from "@mui/material";
 import { useDispatch } from "react-redux";
 import {
   fetchExpensesByMonth,
+  selectAllExpenses,
   selectKeyMonth,
 } from "../features/expenses/expenseSlice";
 import Expenses from "../features/expenses/Expenses";
 import { useParams, useNavigate } from "react-router";
 import { fetchBudgetByMonth } from "../features/budgets/budgetsSlice";
+import { ExpensePieChart } from "./ExpensePieChart";
 
 const MonthlyExpenses = () => {
   const isLogin = useSelector(selectIsLogin);
   const keyMonth = useSelector(selectKeyMonth);
+  const expenses = useSelector(selectAllExpenses);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const params = useParams();
@@ -24,15 +26,17 @@ const MonthlyExpenses = () => {
     if (isLogin && keyMonth !== params.keyMonth)
       dispatch(fetchExpensesByMonth(params.keyMonth));
     dispatch(fetchBudgetByMonth(params.keyMonth));
-  }, [dispatch, isLogin, keyMonth]);
+  }, [dispatch, isLogin, keyMonth, navigate, params.keyMonth]);
 
-  return !isLogin ? (
-    <Container sx={{ width: { sm: 1, md: 1 / 2 }, mt: "50px" }}>
-      <SigninForm />
-    </Container>
-  ) : (
-    <Container sx={{ width: { sm: 1, md: "900px" }, mt: "50px" }}>
-      {keyMonth ? <Expenses /> : null}
+  return (
+    <Container
+      sx={{
+        width: { sm: 1, md: "900px" },
+        mt: "50px",
+        paddingBottom: "100px",
+      }}>
+      {expenses.length ? <ExpensePieChart expenses={expenses} /> : null}
+      {keyMonth && <Expenses expenses={expenses} />}
     </Container>
   );
 };
