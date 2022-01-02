@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Signin from "./components/Signin";
@@ -21,6 +21,23 @@ import AddButton from "./components/AddButton";
 import ROUTES from "./app/routes";
 import MonthlyTotals from "./components/MonthlyTotals";
 
+const signinRedirect = (Component) => {
+  return (props) => {
+    const navigate = useNavigate();
+    const isLogin = useSelector(selectIsLogin);
+
+    useEffect(() => {
+      !isLogin && navigate("/signin");
+    }, [isLogin, navigate]);
+
+    return <Component {...props} />;
+  };
+};
+
+const RedirectExpenseForm = signinRedirect(ExpenseForm);
+const RedirectMonthlyExpenses = signinRedirect(MonthlyExpenses);
+const RedirectMonthlyTotals = signinRedirect(MonthlyTotals);
+
 function App() {
   const dispatch = useDispatch();
   const isLogin = useSelector(selectIsLogin);
@@ -29,40 +46,39 @@ function App() {
     dispatch(fetchCategories());
     (async () => {
       try {
-        const refreshToken = getRefreshToken();
-        if (refreshToken) {
-          const user = getPayloadFromToken(refreshToken);
-          dispatch(setUser(user));
-          await refreshTokens(refreshToken);
-        }
+        //REFRESHING TOKENS ON APP LOAD
+        await refreshTokens(getRefreshToken());
+        const user = getPayloadFromToken(getRefreshToken());
+        dispatch(setUser(user));
       } catch (error) {
+        // ON ERROR OR TOKEN EXPIRY CLEAR LOCAL STORAGE AND LOGOUT
+        console.log(error);
         clearTokens();
         if (isLogin) dispatch(logoutThunk());
       }
     })();
-  }, [dispatch]);
-
-  // AD HOC REDIRECT TO SIGNIN
+  }, [dispatch, isLogin]);
 
   // On home display login , when signin redirect to current month
+
   return (
     <BrowserRouter>
       <div className='App'>
         <Header />
         <main>
           <Routes>
-            <Route path={ROUTES.home()} element={<Home />} />
+            <Route path='/' element={<Home />} />
             <Route path='/signin' element={<Signin />} />
             <Route path='/signup' element={<Signup />} />
-            {isLogin && (
-              <>
-                <Route path='/expense' element={<ExpenseForm />} />
-                <Route path='/month/:keyMonth' element={<MonthlyExpenses />} />
-                <Route path='/months' element={<MonthlyTotals />} />
-                <Route path='/dev' element={<Dev />} />
-              </>
+            <Route path='/expense' element={<RedirectExpenseForm />} />
+            <Route
+              path='/month/:keyMonth'
+              element={<RedirectMonthlyExpenses />}
+            />
+            <Route path='/months' element={<RedirectMonthlyTotals />} />
+            {process.env.NODE_ENV === "development" && (
+              <Route path='/dev' element={<Dev />} />
             )}
-
             <Route path='*' element={<h1>Not found</h1>}></Route>
           </Routes>
         </main>
