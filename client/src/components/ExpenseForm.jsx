@@ -29,7 +29,7 @@ const emptyForm = {
   categoryId: "",
 };
 
-const ExpenseForm = ({ expenseID, setExpenseID }) => {
+const ExpenseForm = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
@@ -93,13 +93,6 @@ const ExpenseForm = ({ expenseID, setExpenseID }) => {
     setFormData((prevState) => ({ ...prevState, [target.name]: target.value }));
   };
 
-  /*const handleAmountChange = ({ target }) => {
-    if (error.amount) setError((error) => ({ ...error, amount: "" }));
-    setFormData((prevState) => ({
-      ...prevState,
-      amount: parseInt(target.value, 10),
-    }));
-  };*/
   if (!categories || !categories.length) return null;
   return (
     <Container

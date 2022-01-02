@@ -6,18 +6,11 @@ import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
 import Container from "@mui/material/Container";
-import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { Menu } from "@mui/material";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  logoutThunk,
-  selectIsLogin,
-  selectUser,
-} from "../features/auth/authSlice";
+import { logoutThunk, selectIsLogin } from "../features/auth/authSlice";
 import { useNavigate } from "react-router";
 import ROUTES from "../app/routes";
 
@@ -30,7 +23,6 @@ const pages = [
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const isLogin = useSelector(selectIsLogin);
-  const user = useSelector(selectUser);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 

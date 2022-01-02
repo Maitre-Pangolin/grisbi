@@ -18,7 +18,6 @@ import Dev from "./components/Dev";
 import ExpenseForm from "./components/ExpenseForm";
 import MonthlyExpenses from "./components/MonthlyExpenses";
 import AddButton from "./components/AddButton";
-import ROUTES from "./app/routes";
 import MonthlyTotals from "./components/MonthlyTotals";
 
 const signinRedirect = (Component) => {

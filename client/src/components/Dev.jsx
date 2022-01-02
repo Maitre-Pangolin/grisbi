@@ -8,7 +8,7 @@ import {
   refreshTokens,
 } from "../services/tokenService";
 import { useDispatch } from "react-redux";
-import ExpensePieChart from "./ExpensePieChart";
+import { ExpensePieChart } from "./ExpensePieChart";
 import { fetchExpensesByMonth } from "../features/expenses/expenseSlice";
 import { getCurrentKeyMonth } from "../services/dateConversionService";
 

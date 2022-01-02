@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { Button, Typography, Box } from "@mui/material";
+import React from "react";
+import { Button, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const Home = () => {

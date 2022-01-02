@@ -9,18 +9,13 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import { useSelector } from "react-redux";
-import {
-  selectKeyMonth,
-  selectAllExpenses,
-  selectCurrentTotal,
-} from "./expenseSlice";
+import { selectKeyMonth, selectCurrentTotal } from "./expenseSlice";
 import { getDateStringFromKeyMonth } from "../../services/dateConversionService";
 import { selectBudget } from "../budgets/budgetsSlice";
 import ModalBudget from "../budgets/ModalBudget";
 
-const Expenses = () => {
+const Expenses = ({ expenses }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const expenses = useSelector(selectAllExpenses);
   const keyMonth = useSelector(selectKeyMonth);
   const total = useSelector(selectCurrentTotal);
   const budget = useSelector(selectBudget);

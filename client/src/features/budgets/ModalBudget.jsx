@@ -4,18 +4,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { selectKeyMonth } from "../expenses/expenseSlice";
 import { setBudget, modifyBudget } from "./budgetsSlice";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: "50%",
-  bgcolor: "white",
-  border: "1px solid #000",
-  boxShadow: 24,
-  p: 4,
-};
-
 const ModalBudget = ({ isOpen, setIsOpen, budget }) => {
   const [amount, setAmount] = useState(budget?.amount || 0);
   const [error, setError] = useState("");
@@ -24,7 +12,7 @@ const ModalBudget = ({ isOpen, setIsOpen, budget }) => {
 
   useEffect(() => {
     setAmount(budget?.amount || 0);
-  }, [isOpen]);
+  }, [budget?.amount]);
 
   const handleSubmit = () => {
     if (amount <= 0) return setError("Budget amount should be positive");
