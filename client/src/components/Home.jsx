@@ -1,36 +1,54 @@
 import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
-import { selectIsLogin } from "../features/auth/authSlice";
-import SigninForm from "../features/auth/SigninForm";
-import { Container } from "@mui/material";
-import { useDispatch } from "react-redux";
-import {
-  fetchExpensesByMonth,
-  selectKeyMonth,
-} from "../features/expenses/expenseSlice";
-import { getCurrentKeyMonth } from "../services/dateConversionService";
-import Expenses from "../features/expenses/Expenses";
-import { fetchBudgetByMonth } from "../features/budgets/budgetsSlice";
+import { Button, Typography, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
-  const isLogin = useSelector(selectIsLogin);
-  const keyMonth = useSelector(selectKeyMonth);
-  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (isLogin && keyMonth !== getCurrentKeyMonth()) {
-      dispatch(fetchExpensesByMonth(getCurrentKeyMonth()));
-      dispatch(fetchBudgetByMonth(getCurrentKeyMonth()));
-    }
-  }, [dispatch, isLogin, keyMonth]);
-  return !isLogin ? (
-    <Container sx={{ width: { sm: 1, md: 1 / 2 }, mt: "50px" }}>
-      <SigninForm />
-    </Container>
-  ) : (
-    <Container sx={{ width: { sm: 1, md: "900px" }, mt: "50px" }}>
-      {keyMonth ? <Expenses /> : null}
-    </Container>
+  return (
+    <>
+      <div
+        style={{
+          display: "flex",
+          position: "absolute",
+          top: "50%",
+          left: "50%",
+          transform: "translate(-50%, -50%)",
+        }}>
+        <img
+          alt='Blue rupee'
+          src='/android-chrome-512x512.png'
+          style={{ width: "300px" }}
+        />
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            padding: "20px",
+            justifyContent: "space-around",
+            alignItems: "flex-end",
+            minWidth: "600px",
+            height: "300px",
+          }}>
+          <Typography variant='h4'>
+            Tired of losing track of your rupees ?
+          </Typography>
+          <Typography variant='h4' align='right'>
+            <strong style={{ color: "#3464eb" }}>Gri$bi</strong> is here for you
+            !
+          </Typography>
+          <Button
+            size='large'
+            variant='contained'
+            sx={{
+              width: "45%",
+            }}
+            onClick={() => navigate("/signup")}>
+            Sign Up Now
+          </Button>
+        </div>
+      </div>
+    </>
   );
 };
 
