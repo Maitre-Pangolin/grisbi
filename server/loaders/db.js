@@ -4,7 +4,12 @@ import logger from "./logger.js";
 
 const pool = new Pool(
   process.env.NODE_ENV === "production"
-    ? { connectionString: process.env.DATABASE_URL }
+    ? {
+        connectionString: process.env.DATABASE_URL,
+        ssl: {
+          rejectUnauthorized: false,
+        },
+      }
     : {}
 );
 
