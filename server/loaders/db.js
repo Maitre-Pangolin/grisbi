@@ -2,7 +2,11 @@ import pg from "pg";
 const { Pool } = pg;
 import logger from "./logger.js";
 
-const pool = new Pool();
+const pool = new Pool(
+  process.env.NODE_ENV === "production"
+    ? { connectionString: process.env.DATABASE_URL }
+    : {}
+);
 
 export const connectionValidation = async () => {
   try {
