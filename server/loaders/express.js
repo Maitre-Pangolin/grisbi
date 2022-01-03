@@ -16,7 +16,11 @@ export default (app) => {
   app.use(bodyparser.json());
   app.use(cors());
 
-  app.use(express.static(path.join(__dirname, "public")));
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.resolve(__dirname, "../client/build")));
+  } else {
+    app.use(express.static(path.join(__dirname, "public")));
+  }
 
   app.use("/api", routerAPI);
 

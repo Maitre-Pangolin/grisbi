@@ -263,4 +263,12 @@ Fix decimals issue on amount input.
 
 Changed favicon and page title
 
+## 2022-02-02
 
+Worked on linkedin and resume, started applying and took a React Design Pattern course for the last few days.
+
+Worked on the front-end to fix a few bug, finish the monthly view, changed the appbar, added and HOC component for signin redirection.
+
+Added chart.js and a doughnut view of expenses.
+
+Trying to configure a first deploy.
