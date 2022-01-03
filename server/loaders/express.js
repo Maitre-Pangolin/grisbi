@@ -17,7 +17,7 @@ export default (app) => {
   app.use(cors());
 
   if (process.env.NODE_ENV === "production") {
-    app.use(express.static(path.resolve(__dirname, "../client/build")));
+    app.use(express.static(path.resolve(__dirname, "../../client/build")));
   } else {
     app.use(express.static(path.join(__dirname, "public")));
   }
