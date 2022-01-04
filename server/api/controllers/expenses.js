@@ -11,7 +11,7 @@ export const createExpense = async (req, res, next) => {
   const { name, amount, date, keyMonth, categoryId } = req.expense;
   const expenseParams = [req.userId, name, amount, date, keyMonth, categoryId];
   const expense = await insertExpense(expenseParams);
-  res.json(expense);
+  res.status(201).json(expense);
 };
 
 export const getExpensesByMonth = async (req, res, next) => {

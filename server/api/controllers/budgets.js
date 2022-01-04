@@ -20,7 +20,7 @@ export const createBudget = async (req, res, next) => {
     throw new ServerError("Invalid keyMonth", 400);
   try {
     const budget = await insertBudget(req.userId, amount, keyMonth);
-    res.json({ budget });
+    res.status(201).json({ budget });
   } catch (error) {
     next(error);
   }
@@ -33,7 +33,7 @@ export const updateBudget = async (req, res, next) => {
     throw new ServerError("Invalid keyMonth", 400);
   try {
     const budget = await modifyBudget(req.userId, amount, keyMonth);
-    res.json({ budget });
+    res.status(200).json({ budget });
   } catch (error) {
     next(error);
   }

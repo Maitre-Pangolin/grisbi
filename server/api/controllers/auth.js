@@ -80,15 +80,3 @@ export const signUp = async (req, res, next) => {
     next(error);
   }
 };
-/*
-export const getUserById = async (req, res, next) => {
-  try {
-    const { id, first_name, last_name, user_name, email } =
-      await selectUserById(req.userId);
-
-    res.json({ id, first_name, last_name, user_name, email });
-  } catch (error) {
-    next(error);
-  }
-};
-*/
