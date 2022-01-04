@@ -45,7 +45,7 @@ export default (app) => {
   app.use(bodyparser.urlencoded({ extended: true }));
   app.use(bodyparser.json());
   app.use(cors());
-  app.use(helmet());
+  // app.use(helmet());
 
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.resolve(__dirname, "../../client/build")));
