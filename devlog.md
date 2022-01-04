@@ -314,3 +314,4 @@ Time for a small break.
 
 Updated some server status code.
 
+Added partial swagger doc using swagger-ui-express and swagger-jsdoc.

@@ -1,6 +1,8 @@
 import express from "express";
 import config from "./config/index.js";
 import loader from "./loaders/index.js";
+import swaggerUI from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
 
 const startServer = async () => {
   const app = express();

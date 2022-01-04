@@ -1,4 +1,5 @@
 import express from "express";
+import config from "../config/index.js";
 import morgan from "morgan";
 import bodyparser from "body-parser";
 import cors from "cors";
@@ -8,10 +9,38 @@ import path from "path";
 import { ServerError } from "../utils/serverError.js";
 import { fileURLToPath } from "url";
 import helmet from "helmet";
+import swaggerUI from "swagger-ui-express";
+import swaggerJsDoc from "swagger-jsdoc";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+const options = {
+  definition: {
+    openapi: "3.0.0",
+    info: {
+      title: "Gri$bi API",
+      version: "1.0.0",
+      description: "API for Gri$bi PERN application",
+    },
+    servers: [
+      {
+        url: `http://localhost:${config.port}`,
+        description: "Development server",
+      },
+      {
+        url: `https://grisbi.herokuapp.com`,
+        description: "Production server",
+      },
+    ],
+  },
+  apis: ["./api/routes/*.js"],
+};
+
+const specs = swaggerJsDoc(options);
+
 export default (app) => {
+  app.use("/api-docs", swaggerUI.serve, swaggerUI.setup(specs));
+
   app.use(morgan("dev"));
   app.use(bodyparser.urlencoded({ extended: true }));
   app.use(bodyparser.json());
