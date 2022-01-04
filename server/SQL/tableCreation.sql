@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS budgets;
 DROP TABLE IF EXISTS refresh_token;
 
 CREATE TABLE "users" (
-  "id" SERIAL PRIMARY KEY,
+  "id" int SERIAL PRIMARY KEY,
   "first_name" varchar(50) NOT NULL,
   "last_name" varchar(50) NOT NULL ,
   "user_name" varchar(50) NOT NULL UNIQUE,
@@ -16,12 +16,12 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "categories" (
-  "id" SERIAL PRIMARY KEY,
+  "id" int SERIAL PRIMARY KEY,
   "name" varchar(50)
 );
 
 CREATE TABLE "expenses" (
-  "id" SERIAL PRIMARY KEY,
+  "id" int SERIAL PRIMARY KEY,
 	"user_id" int REFERENCES users(id),
   "name" varchar NOT NULL,
 	"amount" double precision NOT NULL CHECK (amount>0),
@@ -34,7 +34,7 @@ CREATE TABLE "budgets" (
   "amount" double precision,
   "key_month" varchar(20),
   "user_id" int REFERENCES users(id),
-	PRIMARY KEY (user_id,key_month)
+  PRIMARY KEY (user_id,key_month)
 );
 
 CREATE TABLE "refresh_token" (

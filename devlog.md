@@ -287,3 +287,12 @@ heroku pg:push issues.
 
 Almost there, db schemas exported , but no data.
 
+Stuck on :
+
+```
+pg_restore: error: unrecognized data block type (0) while searching archive
+ !    pg_restore errored with 1
+ ```
+
+Let's try to fix it tomorrow !
+
