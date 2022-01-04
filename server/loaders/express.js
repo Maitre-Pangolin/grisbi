@@ -7,6 +7,7 @@ import routerAPI from "../api/api.js";
 import path from "path";
 import { ServerError } from "../utils/serverError.js";
 import { fileURLToPath } from "url";
+import helmet from "helmet";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -15,6 +16,7 @@ export default (app) => {
   app.use(bodyparser.urlencoded({ extended: true }));
   app.use(bodyparser.json());
   app.use(cors());
+  app.use(helmet());
 
   if (process.env.NODE_ENV === "production") {
     app.use(express.static(path.resolve(__dirname, "../../client/build")));
