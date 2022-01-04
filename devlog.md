@@ -272,3 +272,18 @@ Worked on the front-end to fix a few bug, finish the monthly view, changed the a
 Added chart.js and a doughnut view of expenses.
 
 Trying to configure a first deploy.
+
+## 2022-02-03
+
+Still working on first deploy.
+
+Pushed to Heroku and finally had a functionnal build.
+
+Issue with client side routing , currently using BrowserRouter => Changing to HashRouter
+
+Trying to migrate DB to heroku postgres. Having trouble with psql.
+
+heroku pg:push issues.
+
+Almost there, db schemas exported , but no data.
+

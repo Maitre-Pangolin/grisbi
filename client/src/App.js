@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { BrowserRouter, Routes, Route, useNavigate } from "react-router-dom";
+import { HashRouter, Routes, Route, useNavigate } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./components/Home";
 import Signin from "./components/Signin";
@@ -61,7 +61,7 @@ function App() {
   // On home display login , when signin redirect to current month
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       <div className='App'>
         <Header />
         <main>
@@ -83,7 +83,7 @@ function App() {
         </main>
         {isLogin && <AddButton />}
       </div>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 

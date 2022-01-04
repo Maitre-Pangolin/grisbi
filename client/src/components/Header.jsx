@@ -14,7 +14,6 @@ import { logoutThunk, selectIsLogin } from "../features/auth/authSlice";
 import { useNavigate } from "react-router";
 import ROUTES from "../app/routes";
 
-//const pages = ["Add Expense", "Current Month", "Monthly"];
 const pages = [
   { label: "Current Month", link: ROUTES.currentMonthlyRoute() },
   { label: "Monthly Totals", link: ROUTES.monthsRoute() },
@@ -46,6 +45,7 @@ const Header = () => {
           <Typography
             variant='h6'
             noWrap
+            onClick={() => navigate("/")}
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },

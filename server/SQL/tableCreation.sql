@@ -44,3 +44,28 @@ CREATE TABLE "refresh_token" (
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO grisbi_admin;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO grisbi_admin;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO MaitrePangolin;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO MaitrePangolin;
+
+INSERT INTO categories(name)
+VALUES ('Miscellaneous');
+INSERT INTO categories(name)
+VALUES ('Housing & Utilities');
+INSERT INTO categories(name)
+VALUES ('Transportation');
+INSERT INTO categories(name)
+VALUES ('Groceries');
+INSERT INTO categories(name)
+VALUES ('Restaurant & Take-Out');
+INSERT INTO categories(name)
+VALUES ('Medical & Healthcare');
+INSERT INTO categories(name)
+VALUES ('Sport');
+INSERT INTO categories(name)
+VALUES ('Recreation & Entertainement');
+INSERT INTO categories(name)
+VALUES ('Games');
+INSERT INTO categories(name)
+VALUES ('Clothing');
+INSERT INTO categories(name)
+VALUES ('Drinks');
