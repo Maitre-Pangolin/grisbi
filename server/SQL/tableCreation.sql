@@ -5,7 +5,7 @@ DROP TABLE IF EXISTS budgets;
 DROP TABLE IF EXISTS refresh_token;
 
 CREATE TABLE "users" (
-  "id" int SERIAL PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "first_name" varchar(50) NOT NULL,
   "last_name" varchar(50) NOT NULL ,
   "user_name" varchar(50) NOT NULL UNIQUE,
@@ -16,12 +16,12 @@ CREATE TABLE "users" (
 );
 
 CREATE TABLE "categories" (
-  "id" int SERIAL PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
   "name" varchar(50)
 );
 
 CREATE TABLE "expenses" (
-  "id" int SERIAL PRIMARY KEY,
+  "id" SERIAL PRIMARY KEY,
 	"user_id" int REFERENCES users(id),
   "name" varchar NOT NULL,
 	"amount" double precision NOT NULL CHECK (amount>0),
@@ -33,7 +33,7 @@ CREATE TABLE "expenses" (
 CREATE TABLE "budgets" (
   "amount" double precision,
   "key_month" varchar(20),
-  "user_id" int REFERENCES users(id),
+  "user_id" int REFERENCES "users"(id),
   PRIMARY KEY (user_id,key_month)
 );
 
@@ -47,25 +47,7 @@ GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO grisbi_admin;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO MaitrePangolin;
 GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO MaitrePangolin;
 
-INSERT INTO categories(name)
-VALUES ('Miscellaneous');
-INSERT INTO categories(name)
-VALUES ('Housing & Utilities');
-INSERT INTO categories(name)
-VALUES ('Transportation');
-INSERT INTO categories(name)
-VALUES ('Groceries');
-INSERT INTO categories(name)
-VALUES ('Restaurant & Take-Out');
-INSERT INTO categories(name)
-VALUES ('Medical & Healthcare');
-INSERT INTO categories(name)
-VALUES ('Sport');
-INSERT INTO categories(name)
-VALUES ('Recreation & Entertainement');
-INSERT INTO categories(name)
-VALUES ('Games');
-INSERT INTO categories(name)
-VALUES ('Clothing');
-INSERT INTO categories(name)
-VALUES ('Drinks');
+/*INSERT INTO categories(name)
+VALUES ('Miscellaneous'),('Housing & Utilities'),('Transportation'),
+('Groceries'),('Restaurant & Take-Out'),('Medical & Healthcare'),
+('Sport'),('Recreation & Entertainement'),('Games'),('Clothing'),('Drinks');*/

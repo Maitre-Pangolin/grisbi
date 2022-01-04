@@ -296,3 +296,13 @@ pg_restore: error: unrecognized data block type (0) while searching archive
 
 Let's try to fix it tomorrow !
 
+## 2022-02-04
+
+https://stackoverflow.com/questions/65461994/heroku-postgres-fails-to-pull-and-push-on-windows
+
+Let's try to manually dump the db .
+
+To complicated , requires an AWS account and a lengthy procedure.
+
+Lets hack fix this, as the db scheamas are properly loaded prior to the restore error and the only data needed for the app to properly works are the category, lets create an initialization script at server load that fill in the categories.
+
