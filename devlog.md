@@ -306,3 +306,8 @@ To complicated , requires an AWS account and a lengthy procedure.
 
 Lets hack fix this, as the db scheamas are properly loaded prior to the restore error and the only data needed for the app to properly works are the category, lets create an initialization script at server load that fill in the categories.
 
+At last , it works. I can't migrate a DB to save my life but at least I have a functionning app !
+
+![](https://media.giphy.com/media/TQh3nVXVx9Xlm/giphy.gif)
+
+Time for a small break.
