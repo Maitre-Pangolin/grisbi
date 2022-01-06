@@ -1,15 +1,13 @@
 import express from "express";
 import config from "./config/index.js";
 import loader from "./loaders/index.js";
-import swaggerUI from "swagger-ui-express";
-import swaggerJsDoc from "swagger-jsdoc";
 
 const startServer = async () => {
   const app = express();
 
   await loader(app);
 
-  app
+  const server = app
     .listen(config.port, () => {
       console.log(`
             ########################################
@@ -21,5 +19,8 @@ const startServer = async () => {
       console.log(err);
       process.exit(1);
     });
+  return server;
 };
-startServer();
+
+const server = startServer();
+export default server;

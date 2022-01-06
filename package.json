@@ -5,7 +5,7 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd server && mocha || true",
     "start": "node server/app.js",
     "build": "cd client && npm install && npm run build",
     "startdev": "cd server && nodemon app.js"
@@ -27,5 +27,9 @@
   },
   "engines": {
     "node": "16.x"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "supertest": "^6.1.6"
   }
 }
