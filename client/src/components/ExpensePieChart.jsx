@@ -16,7 +16,6 @@ export const ExpensePieChart = () => {
 
   useEffect(() => {
     if (expenses.length && categories.length) {
-      console.log(expenses, categories);
       const totals = {};
       expenses.forEach((e) => {
         const category = categories[e.categoryId - 1].name;
@@ -24,13 +23,11 @@ export const ExpensePieChart = () => {
           ? (totals[category] = e.amount)
           : (totals[category] += e.amount);
       });
-      console.log(totals);
       const labels = Object.keys(totals);
 
       const data = labels.map((label) => totals[label]);
       setLabels(labels);
       setData(data);
-      console.log(data);
     }
   }, [expenses, categories]);
 
